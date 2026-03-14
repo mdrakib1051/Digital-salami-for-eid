@@ -156,8 +156,8 @@ function getWishByDistrict(district, amount) {
 function typeWriter(text) {
   clearInterval(typingTimer);
   typedWish.textContent = '';
-
   let i = 0;
+
   typingTimer = setInterval(() => {
     typedWish.textContent += text.charAt(i);
     i++;
@@ -175,8 +175,7 @@ function saveToLeaderboard() {
   const entry = {
     name: savedName,
     district: savedDistrict,
-    amount: currentAmount,
-    time: new Date().toLocaleString()
+    amount: currentAmount
   };
 
   const existing = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
@@ -278,16 +277,12 @@ openCardBtn.addEventListener('click', () => {
   wishEnvelope.classList.add('hidden');
   wishCard.classList.remove('hidden');
 
-  wishCard.classList.remove('show');
-  void wishCard.offsetWidth;
-  wishCard.classList.add('show');
-
   const districtWish = getWishByDistrict(savedDistrict, currentAmount);
   saveToLeaderboard();
 
   setTimeout(() => {
     typeWriter(districtWish);
-  }, 1200);
+  }, 600);
 });
 
 shareBtn.addEventListener('click', async () => {
@@ -327,8 +322,7 @@ whatsappBtn.addEventListener('click', () => {
     return;
   }
 
-  const finalMsg =
-`Digital Salami Contact Request
+  const finalMsg = `Digital Salami Contact Request
 
 Name: ${savedName}
 District: ${savedDistrict}
@@ -345,7 +339,6 @@ againBtn.addEventListener('click', () => {
 
   typedWish.textContent = '';
   wishCard.classList.add('hidden');
-  wishCard.classList.remove('show');
   wishEnvelope.classList.remove('hidden');
 
   phoneInput.value = '';
