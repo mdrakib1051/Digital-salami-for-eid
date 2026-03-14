@@ -18,8 +18,29 @@
 
   <main class="app">
 
+    <!-- PAGE 0 : INTRO -->
+    <section id="page0" class="page active">
+      <div class="page-card intro-card glass">
+        <div class="intro-badge">PREMIUM EID EXPERIENCE</div>
+        <h1 class="intro-title">Welcome to <span>Digital Salami</span></h1>
+        <p class="intro-text">
+          ঈদের আনন্দকে করে তুলুন আরও বিশেষ। ধাপে ধাপে নিজের নাম, জেলা, ডিজিটাল সালামি,
+          wish card, share option আর special contact flow উপভোগ করুন।
+        </p>
+
+        <div class="intro-steps">
+          <div class="intro-step show-delay-1">✨ Premium Animated Experience</div>
+          <div class="intro-step show-delay-2">📍 Regional Zela-based Wish</div>
+          <div class="intro-step show-delay-3">🎰 Magic Salami Spin</div>
+          <div class="intro-step show-delay-4">💌 Wish Card + Share + Leaderboard</div>
+        </div>
+
+        <button id="startBtn" class="btn btn-gold intro-btn">Start Experience</button>
+      </div>
+    </section>
+
     <!-- PAGE 1 -->
-    <section id="page1" class="page active">
+    <section id="page1" class="page">
       <div class="page-card hero-card glass">
         <div class="top-badge">EID SPECIAL EXPERIENCE</div>
 
@@ -167,6 +188,29 @@
           <div class="wish-footer card-part part-6">
             <p id="resultText">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
             <button id="againBtn" class="btn btn-outline">Spin Again</button>
+          </div>
+
+          <div class="share-box card-part part-7">
+            <h3>Share Your Digital Salami</h3>
+            <div class="share-buttons">
+              <button id="shareBtn" class="btn btn-soft small-btn">Share Result</button>
+              <button id="copyBtn" class="btn btn-outline small-btn">Copy Text</button>
+            </div>
+          </div>
+
+          <div class="leaderboard-box card-part part-8">
+            <h3>Latest 7 Leaderboard</h3>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+          </div>
+
+          <div class="contact-box card-part part-9">
+            <h3>Contact on WhatsApp</h3>
+            <p class="contact-note">আপনার ফোন নাম্বার এবং message দিন। তারপর WhatsApp open হয়ে আমার নম্বরে ready-made message যাবে।</p>
+
+            <input id="phoneInput" type="text" placeholder="আপনার ফোন নাম্বার" />
+            <textarea id="messageInput" placeholder="আপনার message লিখুন..."></textarea>
+
+            <button id="whatsappBtn" class="btn btn-gold">Send via WhatsApp</button>
           </div>
         </div>
       </div>
