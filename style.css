@@ -116,6 +116,12 @@ body {
   backdrop-filter: blur(18px);
 }
 
+.intro-card {
+  text-align: center;
+  max-width: 1000px;
+}
+
+.intro-badge,
 .top-badge {
   display: inline-block;
   padding: 10px 16px;
@@ -129,6 +135,7 @@ body {
   animation: softPulse 3s ease-in-out infinite;
 }
 
+.intro-title,
 .hero-card h1 {
   font-family: 'Cinzel', serif;
   font-size: 58px;
@@ -136,6 +143,7 @@ body {
   margin-bottom: 14px;
 }
 
+.intro-title span,
 .hero-card h1 span {
   display: block;
   background: linear-gradient(90deg, #fff5c6, #ffc53d, #fff5c6);
@@ -143,11 +151,41 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.intro-text,
 .hero-text {
-  max-width: 760px;
+  max-width: 780px;
+  margin: 0 auto;
   font-size: 18px;
   line-height: 1.8;
   color: var(--text-soft);
+}
+
+.intro-steps {
+  margin: 32px auto 0;
+  max-width: 720px;
+  display: grid;
+  gap: 14px;
+}
+
+.intro-step {
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 17px;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: sectionReveal 0.75s ease forwards;
+}
+
+.show-delay-1 { animation-delay: 0.15s; }
+.show-delay-2 { animation-delay: 0.35s; }
+.show-delay-3 { animation-delay: 0.55s; }
+.show-delay-4 { animation-delay: 0.75s; }
+
+.intro-btn {
+  max-width: 340px;
+  margin: 30px auto 0;
 }
 
 .feature-grid {
@@ -243,21 +281,33 @@ body {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
-  height: 58px;
   border-radius: 18px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.10);
   outline: none;
   color: white;
   font-size: 16px;
-  padding: 0 18px;
+  padding: 16px 18px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
+input,
+select {
+  height: 58px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  margin-top: 14px;
+}
+
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: rgba(255, 213, 106, 0.38);
   box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.08);
   transform: translateY(-1px);
@@ -267,7 +317,8 @@ select option {
   color: black;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: #8f98ab;
 }
 
@@ -314,6 +365,12 @@ input::placeholder {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.14);
   color: white;
+}
+
+.small-btn {
+  width: auto;
+  min-width: 160px;
+  padding: 0 18px;
 }
 
 .welcome-box {
@@ -398,7 +455,7 @@ input::placeholder {
   padding: 24px;
   text-align: center;
   max-width: 720px;
-  margin: 40px auto 0;
+  margin: 10px auto 0;
   background: rgba(0,0,0,0.14);
   border: 1px solid rgba(255,255,255,0.08);
   animation: envelopeRise 0.8s ease;
@@ -521,11 +578,15 @@ input::placeholder {
   margin-top: 18px;
 }
 
-.meta-box {
+.meta-box,
+.share-box,
+.leaderboard-box,
+.contact-box {
   border-radius: 22px;
-  padding: 16px 18px;
+  padding: 18px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
+  margin-top: 18px;
 }
 
 .meta-box span {
@@ -583,6 +644,41 @@ input::placeholder {
   flex: 1;
 }
 
+.share-box h3,
+.leaderboard-box h3,
+.contact-box h3 {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.leaderboard-list {
+  display: grid;
+  gap: 10px;
+}
+
+.leaderboard-item {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.contact-note {
+  color: #c7d0e0;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
 .card-part {
   opacity: 0;
   transform: translateY(18px);
@@ -594,6 +690,9 @@ input::placeholder {
 .wish-card.show .part-4 { animation: fadeUp 0.55s ease 0.62s forwards; }
 .wish-card.show .part-5 { animation: fadeUp 0.55s ease 0.78s forwards; }
 .wish-card.show .part-6 { animation: fadeUp 0.55s ease 0.94s forwards; }
+.wish-card.show .part-7 { animation: fadeUp 0.55s ease 1.10s forwards; }
+.wish-card.show .part-8 { animation: fadeUp 0.55s ease 1.26s forwards; }
+.wish-card.show .part-9 { animation: fadeUp 0.55s ease 1.42s forwards; }
 
 .appear {
   opacity: 0;
@@ -672,6 +771,7 @@ input::placeholder {
     grid-template-columns: 1fr;
   }
 
+  .intro-title,
   .hero-card h1 {
     font-size: 44px;
   }
@@ -687,6 +787,7 @@ input::placeholder {
     border-radius: 24px;
   }
 
+  .intro-title,
   .hero-card h1 {
     font-size: 36px;
   }
@@ -710,5 +811,9 @@ input::placeholder {
 
   .script-text {
     font-size: 30px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
   }
 }
