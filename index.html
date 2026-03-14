@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eid Salami Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="badge">EID PREMIUM SALAMI</div>
+
+  <h1>
+    Premium Random
+    <span>Salami Distribution</span>
+  </h1>
+
+  <p class="subtitle">
+    নাম লিখুন, স্পিন করুন, আর ১ থেকে ১০০ টাকার মধ্যে র‍্যান্ডম সালামি জিতে নিন।
+  </p>
+
+  <div class="card">
+
+    <div class="label">আপনার নাম লিখুন</div>
+
+    <input id="nameInput" placeholder="যেমন: Rakib">
+
+    <button id="saveNameBtn" class="btn btn-primary">Continue</button>
+
+    <div id="welcomeBox" class="welcome"></div>
+
+  </div>
+
+
+  <div class="card slot-section">
+
+    <div class="slot-title">Magic Slot Machine</div>
+
+    <div class="slot-subtitle">প্রিমিয়াম ক্যাসিনো স্টাইল ঈদ সালামি ড্র</div>
+
+
+    <div class="slots">
+
+      <div class="slot" id="slot1">0</div>
+      <div class="slot" id="slot2">0</div>
+      <div class="slot" id="slot3">1</div>
+
+    </div>
+
+
+    <button id="spinBtn" class="btn btn-primary" disabled>
+      Spin for Salami
+    </button>
+
+
+    <div class="result" id="resultBox">
+
+      <h2 id="amountText">৳ 0</h2>
+
+      <p id="resultText"></p>
+
+      <div class="wish" id="wishText"></div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    ঈদ মোবারক 🌙 • Premium Dark Theme
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
