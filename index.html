@@ -12,77 +12,71 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="bg-orb orb-3"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
 
-  <main class="app">
+  <main class="app-shell">
 
-    <!-- PAGE 0 : INTRO -->
+    <!-- INTRO PAGE -->
     <section id="page0" class="page active">
-      <div class="page-card intro-card glass">
-        <div class="intro-badge">PREMIUM EID EXPERIENCE</div>
-        <h1 class="intro-title">Welcome to <span>Digital Salami</span></h1>
-        <p class="intro-text">
-          ঈদের আনন্দকে করে তুলুন আরও বিশেষ। ধাপে ধাপে নিজের নাম, জেলা, ডিজিটাল সালামি,
-          wish card, share option আর special contact flow উপভোগ করুন।
-        </p>
+      <header class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="top-pill">Premium Eid Experience</div>
+      </header>
 
-        <div class="intro-steps">
-          <div class="intro-step show-delay-1">✨ Premium Animated Experience</div>
-          <div class="intro-step show-delay-2">📍 Regional Zela-based Wish</div>
-          <div class="intro-step show-delay-3">🎰 Magic Salami Spin</div>
-          <div class="intro-step show-delay-4">💌 Wish Card + Share + Leaderboard</div>
+      <div class="hero-layout">
+        <div class="hero-left">
+          <p class="eyebrow intro-anim intro-1">EID 2026 SPECIAL</p>
+          <h1 class="hero-title intro-anim intro-2">
+            Digital <span>Salami</span>
+          </h1>
+          <p class="hero-desc intro-anim intro-3">
+            আধুনিক প্রিমিয়াম ডিজাইনে ঈদের সালামি experience। ধাপে ধাপে
+            নাম, জেলা, ম্যাজিক স্পিন, wish card, share option আর contact flow।
+          </p>
+
+          <div class="hero-features">
+            <div class="feature-card intro-anim intro-4">✨ Premium Dark UI</div>
+            <div class="feature-card intro-anim intro-5">🎰 Magic Slot Experience</div>
+            <div class="feature-card intro-anim intro-6">💌 Regional Wish Card</div>
+          </div>
+
+          <button id="startBtn" class="btn btn-gold intro-anim intro-7">Start Experience</button>
         </div>
 
-        <button id="startBtn" class="btn btn-gold intro-btn">Start Experience</button>
+        <div class="hero-right intro-anim intro-5">
+          <div class="preview-panel">
+            <div class="preview-badge">LIVE PREVIEW</div>
+            <div class="mini-slot">
+              <span>0</span>
+              <span>7</span>
+              <span>5</span>
+            </div>
+            <div class="preview-text">Animated Salami • Wish • Share • Contact</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- PAGE 1 -->
+    <!-- FORM PAGE -->
     <section id="page1" class="page">
-      <div class="page-card hero-card glass">
-        <div class="top-badge">EID SPECIAL EXPERIENCE</div>
+      <header class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-badge">Step 01</div>
+      </header>
 
-        <h1>Digital <span>Salami</span></h1>
-
-        <p class="hero-text">
-          নাম লিখুন, জেলা নির্বাচন করুন, তারপর ধাপে ধাপে এগিয়ে গিয়ে
-          প্রিমিয়াম ম্যাজিক স্লট থেকে আপনার ডিজিটাল সালামি এবং বিশেষ wish card গ্রহণ করুন।
-        </p>
-
-        <div class="feature-grid">
-          <div class="feature-item appear delay-1">
-            <div class="feature-icon">✨</div>
-            <div>
-              <h3>Premium UI</h3>
-              <p>লাক্সারি ডার্ক এক্সপেরিয়েন্স</p>
-            </div>
-          </div>
-
-          <div class="feature-item appear delay-2">
-            <div class="feature-icon">🎰</div>
-            <div>
-              <h3>Magic Spin</h3>
-              <p>র‍্যান্ডম সালামি ড্র</p>
-            </div>
-          </div>
-
-          <div class="feature-item appear delay-3">
-            <div class="feature-icon">💌</div>
-            <div>
-              <h3>Wish Card</h3>
-              <p>অ্যানিমেটেড প্রিমিয়াম শুভেচ্ছা</p>
-            </div>
-          </div>
+      <div class="split-layout">
+        <div class="split-copy">
+          <p class="eyebrow">YOUR EID PROFILE</p>
+          <h2 class="section-title">প্রথমে আপনার তথ্য দিন</h2>
+          <p class="section-desc">
+            নাম এবং জেলা দিয়ে personal salami journey শুরু করুন।
+            এরপর আপনার জন্য customised flow চালু হবে।
+          </p>
         </div>
 
-        <div class="form-box appear delay-4">
-          <div class="panel-header">
-            <p class="mini-title">STEP 01</p>
-            <h2>আপনার তথ্য দিন</h2>
-          </div>
-
+        <div class="form-surface">
           <label class="input-label">আপনার নাম</label>
           <input id="nameInput" type="text" placeholder="যেমন: Rakib" />
 
@@ -113,107 +107,120 @@
       </div>
     </section>
 
-    <!-- PAGE 2 -->
+    <!-- SPIN PAGE -->
     <section id="page2" class="page">
-      <div class="page-card spin-card glass">
-        <div class="panel-header center appear delay-1">
-          <p class="mini-title">STEP 02</p>
-          <h2>Magic Slot Spin</h2>
-          <p class="panel-subtitle">
-            আপনার ডিজিটাল সালামি জানতে নিচের স্লটে স্পিন দিন
-          </p>
-        </div>
+      <header class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-badge">Step 02</div>
+      </header>
 
-        <div class="slot-machine appear delay-2">
-          <div class="slot-frame">
-            <div class="slot" id="slot1">0</div>
-            <div class="slot" id="slot2">0</div>
-            <div class="slot" id="slot3">1</div>
+      <div class="spin-layout">
+        <p class="eyebrow">MAGIC SLOT</p>
+        <h2 class="section-title center-text">Spin for Your Salami</h2>
+        <p class="section-desc center-text">
+          আপনার ডিজিটাল সালামি জানতে নিচের ম্যাজিক স্লটে স্পিন দিন
+        </p>
+
+        <div class="slot-area">
+          <div class="slot-machine">
+            <div class="slot-frame">
+              <div class="slot" id="slot1">0</div>
+              <div class="slot" id="slot2">0</div>
+              <div class="slot" id="slot3">1</div>
+            </div>
+            <div class="slot-shine"></div>
           </div>
-          <div class="slot-shine"></div>
-          <div class="slot-glow"></div>
         </div>
 
-        <button id="spinBtn" class="btn btn-premium appear delay-3">Spin for Salami</button>
-        <div id="statusText" class="status-text appear delay-4">সব প্রস্তুত। এখন ম্যাজিক স্পিন দিন ✨</div>
+        <button id="spinBtn" class="btn btn-premium">Spin for Salami</button>
+        <div id="statusText" class="status-text">সব প্রস্তুত। এখন ম্যাজিক স্পিন দিন ✨</div>
       </div>
     </section>
 
-    <!-- PAGE 3 -->
+    <!-- RESULT PAGE -->
     <section id="page3" class="page">
-      <div class="page-card wish-page glass">
-        <div id="wishEnvelope" class="wish-envelope">
-          <div class="envelope-top"></div>
-          <div class="envelope-body">
-            <p>আপনার জন্য একটি বিশেষ ঈদ শুভেচ্ছা কার্ড প্রস্তুত হয়েছে</p>
-            <button id="openCardBtn" class="btn btn-soft">Open Wish Card</button>
-          </div>
-        </div>
+      <header class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-badge">Final Result</div>
+      </header>
 
-        <div id="wishCard" class="wish-card hidden">
-          <div class="wish-card-glow"></div>
-
-          <div class="wish-card-header card-part part-1">
-            <div>
-              <p class="mini-title gold-text">DIGITAL SALAMI CARD</p>
-              <h2 id="cardGreeting">ঈদ মোবারক</h2>
-            </div>
-            <div class="moon-icon">🌙</div>
-          </div>
-
-          <div class="wish-photo-area card-part part-2">
-            <div class="wish-photo-overlay"></div>
-            <div class="wish-photo-content">
-              <p class="script-text">Celebrating Joy, Blessings & Smiles</p>
-              <div class="amount-pill" id="amountText">৳ 0</div>
+      <div class="result-layout">
+        <section class="result-main">
+          <div id="wishEnvelope" class="wish-envelope">
+            <div class="envelope-top"></div>
+            <div class="envelope-content">
+              <h3>Your Premium Wish Card is Ready</h3>
+              <p>একটি প্রিমিয়াম personal Eid card আপনার জন্য প্রস্তুত হয়েছে</p>
+              <button id="openCardBtn" class="btn btn-soft">Open Wish Card</button>
             </div>
           </div>
 
-          <div class="wish-meta">
-            <div class="meta-box card-part part-3">
-              <span>নাম</span>
-              <strong id="cardName">—</strong>
+          <div id="wishCard" class="wish-card hidden">
+            <div class="wish-hero">
+              <div>
+                <p class="eyebrow">DIGITAL SALAMI CARD</p>
+                <h2 id="cardGreeting" class="wish-title">ঈদ মোবারক</h2>
+                <p id="resultText" class="wish-subtext">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
+              </div>
+              <div class="moon-badge">🌙</div>
             </div>
-            <div class="meta-box card-part part-4">
-              <span>জেলা</span>
-              <strong id="cardDistrict">—</strong>
+
+            <div class="wish-banner">
+              <div class="wish-banner-overlay"></div>
+              <div class="wish-banner-content">
+                <p class="script-line">Blessings, Smiles & Eid Joy</p>
+                <div id="amountText" class="amount-chip">৳ 0</div>
+              </div>
+            </div>
+
+            <div class="meta-row">
+              <div class="meta-card">
+                <span>নাম</span>
+                <strong id="cardName">—</strong>
+              </div>
+              <div class="meta-card">
+                <span>জেলা</span>
+                <strong id="cardDistrict">—</strong>
+              </div>
+            </div>
+
+            <div class="wish-highlight">
+              <span class="wish-label">Regional Special Wish</span>
+              <p id="typedWish" class="typed-wish"></p>
+            </div>
+
+            <div class="action-row">
+              <button id="againBtn" class="btn btn-outline">Spin Again</button>
+              <button id="shareBtn" class="btn btn-soft">Share Result</button>
+              <button id="copyBtn" class="btn btn-outline">Copy Text</button>
             </div>
           </div>
+        </section>
 
-          <div class="typed-line-wrap card-part part-5">
-            <span class="typed-label">Special Wish</span>
-            <p id="typedWish" class="typed-wish"></p>
-          </div>
-
-          <div class="wish-footer card-part part-6">
-            <p id="resultText">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
-            <button id="againBtn" class="btn btn-outline">Spin Again</button>
-          </div>
-
-          <div class="share-box card-part part-7">
-            <h3>Share Your Digital Salami</h3>
-            <div class="share-buttons">
-              <button id="shareBtn" class="btn btn-soft small-btn">Share Result</button>
-              <button id="copyBtn" class="btn btn-outline small-btn">Copy Text</button>
-            </div>
-          </div>
-
-          <div class="leaderboard-box card-part part-8">
+        <aside class="result-sidebar">
+          <div class="side-box">
             <h3>Latest 7 Leaderboard</h3>
             <div id="leaderboardList" class="leaderboard-list"></div>
           </div>
 
-          <div class="contact-box card-part part-9">
+          <div class="side-box">
             <h3>Contact on WhatsApp</h3>
-            <p class="contact-note">আপনার ফোন নাম্বার এবং message দিন। তারপর WhatsApp open হয়ে আমার নম্বরে ready-made message যাবে।</p>
+            <p class="side-note">
+              আপনার ফোন নাম্বার আর message লিখুন। তারপর WhatsApp open হয়ে ready-made message যাবে।
+            </p>
 
             <input id="phoneInput" type="text" placeholder="আপনার ফোন নাম্বার" />
             <textarea id="messageInput" placeholder="আপনার message লিখুন..."></textarea>
 
             <button id="whatsappBtn" class="btn btn-gold">Send via WhatsApp</button>
           </div>
-        </div>
+        </aside>
       </div>
+
+      <footer class="footer-bar">
+        <span>Digital Salami Premium Experience</span>
+        <span>Eid Special • Mobile Friendly</span>
+      </footer>
     </section>
 
   </main>
