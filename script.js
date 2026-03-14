@@ -1,90 +1,96 @@
-const nameInput=document.getElementById('nameInput')
-const saveNameBtn=document.getElementById('saveNameBtn')
-const welcomeBox=document.getElementById('welcomeBox')
+const nameInput = document.getElementById("nameInput")
+const districtInput = document.getElementById("districtInput")
 
-const spinBtn=document.getElementById('spinBtn')
+const saveBtn = document.getElementById("saveBtn")
 
-const slot1=document.getElementById('slot1')
-const slot2=document.getElementById('slot2')
-const slot3=document.getElementById('slot3')
+const spinBtn = document.getElementById("spinBtn")
 
-const resultBox=document.getElementById('resultBox')
-const amountText=document.getElementById('amountText')
-const resultText=document.getElementById('resultText')
-const wishText=document.getElementById('wishText')
+const slot1 = document.getElementById("slot1")
+const slot2 = document.getElementById("slot2")
+const slot3 = document.getElementById("slot3")
 
-let savedName=""
-let rolling=false
+const card = document.getElementById("card")
+const amount = document.getElementById("amount")
+const wish = document.getElementById("wish")
+
+let name=""
+let district=""
 
 const wishes=[
-"ঈদ মোবারক। আপনার জীবন ভরে উঠুক সুখ ও শান্তিতে।",
-"এই ছোট্ট সালামির সাথে রইল অনেক দোয়া ও ভালোবাসা।",
-"আপনার ঈদ হোক আনন্দে ভরা।",
-"এই সালামি আপনার মুখে হাসি এনে দিক।",
-"চাঁদের আলো ছড়িয়ে পড়ুক আপনার জীবনে।",
-"আপনার জন্য রইল আন্তরিক ঈদের শুভেচ্ছা।"
+
+"ঈদ মোবারক। আপনার জীবন সুখে ভরে উঠুক।",
+
+"এই সালামির সাথে রইল অনেক ভালোবাসা।",
+
+"আনন্দে কাটুক আপনার ঈদ।",
+
+"আপনার জন্য রইল আন্তরিক শুভেচ্ছা।",
+
+"আপনার জীবনে আসুক সুখ ও শান্তি।"
+
 ]
 
-saveNameBtn.onclick=function(){
 
-const name=nameInput.value.trim()
+saveBtn.onclick=function(){
+
+name=nameInput.value.trim()
+
+district=districtInput.value
 
 if(!name){
-alert("আগে আপনার নাম লিখুন")
+
+alert("নাম লিখুন")
+
 return
+
 }
 
-savedName=name
+if(!district){
 
-welcomeBox.style.display="block"
+alert("জেলা নির্বাচন করুন")
 
-welcomeBox.innerHTML="স্বাগতম <b>"+savedName+"</b> — আপনার জন্য ঈদের সালামি প্রস্তুত"
+return
+
+}
 
 spinBtn.disabled=false
 
 }
 
+
 spinBtn.onclick=function(){
 
-if(!savedName||rolling)return
-
-rolling=true
 spinBtn.disabled=true
-spinBtn.textContent="Rolling..."
-
-resultBox.style.display="none"
 
 const interval=setInterval(function(){
 
 slot1.textContent=Math.floor(Math.random()*10)
+
 slot2.textContent=Math.floor(Math.random()*10)
+
 slot3.textContent=Math.floor(Math.random()*10)
 
-},90)
+},100)
 
-const finalAmount=Math.floor(Math.random()*100)+1
-
-const formatted=String(finalAmount).padStart(3,'0')
+const result=Math.floor(Math.random()*100)+1
 
 setTimeout(function(){
 
 clearInterval(interval)
 
-slot1.textContent=formatted[0]
-slot2.textContent=formatted[1]
-slot3.textContent=formatted[2]
+const num=String(result).padStart(3,"0")
 
-amountText.textContent="৳ "+finalAmount
+slot1.textContent=num[0]
+slot2.textContent=num[1]
+slot3.textContent=num[2]
 
-resultText.textContent=savedName+" , আপনার জন্য আজকের ঈদ সালামি ৳ "+finalAmount
+amount.textContent="৳"+result
 
-wishText.textContent="✨ "+wishes[finalAmount%wishes.length]
+wish.textContent=wishes[result%wishes.length]
 
-resultBox.style.display="block"
+card.classList.remove("hidden")
 
-rolling=false
 spinBtn.disabled=false
-spinBtn.textContent="Spin Again"
 
 },2500)
 
