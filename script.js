@@ -1,6 +1,9 @@
+const page0 = document.getElementById('page0');
 const page1 = document.getElementById('page1');
 const page2 = document.getElementById('page2');
 const page3 = document.getElementById('page3');
+
+const startBtn = document.getElementById('startBtn');
 
 const nameInput = document.getElementById('nameInput');
 const districtInput = document.getElementById('districtInput');
@@ -25,6 +28,14 @@ const resultText = document.getElementById('resultText');
 const cardGreeting = document.getElementById('cardGreeting');
 const againBtn = document.getElementById('againBtn');
 
+const shareBtn = document.getElementById('shareBtn');
+const copyBtn = document.getElementById('copyBtn');
+const leaderboardList = document.getElementById('leaderboardList');
+
+const phoneInput = document.getElementById('phoneInput');
+const messageInput = document.getElementById('messageInput');
+const whatsappBtn = document.getElementById('whatsappBtn');
+
 let savedName = '';
 let savedDistrict = '';
 let currentAmount = 0;
@@ -35,68 +46,68 @@ const slotElements = [slot1, slot2, slot3];
 
 const districtWishes = {
   Dhaka: [
-    'ঢাকার ছন্দে বলি — আপনার ঈদ হোক আনন্দে ভরা, আলোয় ভরা, ভালোবাসায় ভরা।',
-    'ঢাকার ব্যস্ততার মাঝেও আপনার জীবনে নেমে আসুক শান্তি, সুখ আর ঈদের মিষ্টি হাসি।'
+    'ঢাহাইয়া ঢঙে কই — তোমার ঈদটা জোসস হোক, সুখে-শান্তিতে ভইরা যাক সবকিছু।',
+    'এইডা তোমার লাইগা অনেক আদর, দোয়া আর মনের খুশি নিয়া পাঠাইলাম।'
   ],
   Chattogram: [
-    'চাটগাঁইয়া ঢঙে কই — এই ঈদে আপনার ঘর ভইরা যাক খুশি, বরকত আর ভালোবাসায়।',
-    'আপনার লাইগা রইল অনেক দোয়া, আনন্দ আর উজ্জ্বল ঈদের শুভেচ্ছা।'
+    'চাটগাঁইয়া কই — তুমার ঈদডা অনেক ফুর্তির আর বরকতের অইক, আল্লাহ ভালে রাখুক।',
+    'তুমার লাইগা রইল অনেক দোয়া, সুখ-শান্তি আর মনভরা খুশির সালাম।'
   ],
   Sylhet: [
-    'সিলেটি মিঠা আবহে — আপনার ঈদ হউক দোয়া, শান্তি আর সুখের আলোয় ভরা।',
-    'মনভরা ভালোবাসা আর বরকত নিয়া আসুক এই ঈদ আপনার জীবনে।'
+    'সিলেটি ঢঙে কই — তুমার ঈদখান মজা আর রহমতে ভইরা যাউক।',
+    'আল্লাহ তুমারে সুখে রাখউক, আর মনত নামউক শান্তি আর খুশি।'
   ],
   Rajshahi: [
-    'রাজশাহীর আমের মিষ্টতার মতো আপনার ঈদটাও হোক মিষ্টি আর স্মরণীয়।',
-    'আপনার পরিবারে নেমে আসুক সুখ, শান্তি আর অফুরন্ত বরকত।'
+    'রাজশাহীর মিঠা ভাষায় — তোমার ঈদ আমের মতোই মিষ্টি হোক।',
+    'সুখ, শান্তি আর ভালোবাসায় ভরে উঠুক তোমার প্রতিটা দিন।'
   ],
   Khulna: [
-    'খুলনার আন্তরিকতা নিয়ে বলি — ঈদের আনন্দে ভরে উঠুক আপনার প্রতিটি মুহূর্ত।',
-    'আপনার জীবনে আসুক শান্তি, সমৃদ্ধি আর প্রিয়জনদের সঙ্গে অগণিত সুখের সময়।'
+    'খুলনার টানে বলি — তোমার ঈদটা হোক আরাম, আনন্দ আর আপন মানুষের ভালোবাসায় ভরা।',
+    'তোমার জীবনে আসুক শান্তি, বরকত আর মনভরা হাসি।'
   ],
   Barishal: [
-    'বরিশালের নদীর হাওয়ার মতো শীতল সুখ নেমে আসুক আপনার জীবনে এই ঈদে।',
-    'ভালোবাসা, দোয়া আর আনন্দে ভরে উঠুক আপনার ঘর আর মন।'
+    'বরিশালের ভাষায় কই — তোমার ঈদডা নদীর হাওয়ার মতন ঠাণ্ডা শান্তি নিয়া আইব।',
+    'ভালোবাসা আর আনন্দে ভইরা যাক তুমার ঘরদুয়ার।'
   ],
   Rangpur: [
-    'রংপুরের মাটির টানে বলি — আপনার ঈদ হোক সহজ, সুন্দর আর খুশিতে ভরা।',
-    'আপনার দিনগুলো রঙিন হয়ে উঠুক বরকত, ভালোবাসা আর হাসিতে।'
+    'রংপুরিয়া মেজাজে — তোর ঈদডা খুবই ফাটাফাটি আর সুখের হউক।',
+    'দোয়া করি, তোর জীবনডা খুশি আর বরকতে ভইরা উঠুক।'
   ],
   Mymensingh: [
-    'ময়মনসিংহের স্নিগ্ধতায় আপনার ঈদ হয়ে উঠুক শান্তি আর আনন্দের উৎসব।',
-    'পরিবারের সঙ্গে কাটুক দোয়া, হাসি আর ভালোবাসায় ভরা সুন্দর সময়।'
+    'ময়মনসিংহের টানে — তোমার ঈদটা হোক নরম, মিষ্টি আর আপন সুখে ভরা।',
+    'পরিবার আর প্রিয় মানুষদের সাথে কাটুক দারুণ সব সময়।'
   ],
   Cumilla: [
-    'কুমিল্লার মাধুর্যে বলি — এই ঈদে আপনার জীবন ভরে উঠুক সুখ আর শুভকামনায়।',
-    'অগণিত হাসি, দোয়া আর আনন্দে কাটুক আপনার ঈদের প্রতিটি ক্ষণ।'
+    'কুমিল্লার আপন ভাষায় — তোমার ঈদ হোক সুখের, মনের আরাম আর ভালোবাসার।',
+    'এই সালামির সাথে রইল ভুরিভুরি শুভেচ্ছা আর অনেক দোয়া।'
   ],
   Noakhali: [
-    'নোয়াখালীর আপন টানে বলি — আপনার ঈদ হোক দারুণ সুখের আর ভালোবাসার।',
-    'ঘরে ঘরে নেমে আসুক শান্তি, বরকত আর অনেক খুশির আলো।'
+    'নোয়াখাইল্লা টানে কই — তুমার ঈদডা অনেক সুন্দর অইক, সুখে শান্তিতে যাক।',
+    'ঘরভর্তি খুশি, মায়া আর বরকত লইয়া আসুক এই ঈদ।'
   ],
   Jessore: [
-    'যশোরের আন্তরিক শুভেচ্ছা — আপনার ঈদ হয়ে উঠুক আনন্দময় আর স্মরণীয়।',
-    'হাসি, শান্তি আর ভালোবাসা থাকুক আপনার প্রতিটি দিনে।'
+    'যশোরের আপন টানে — তোমার ঈদ হোক রঙিন, হাসিখুশি আর স্মরণীয়।',
+    'ভালোবাসা আর শান্তিতে ভরে উঠুক তোমার জীবন।'
   ],
   Bogra: [
-    'বগুড়ার দইয়ের মতো মিষ্টি হোক আপনার ঈদ আর সম্পর্কগুলো।',
-    'ভরে উঠুক জীবন আনন্দ, দোয়া আর মায়ায়।'
+    'বগুড়ার মিঠা ঢঙে — তোমার ঈদটা দইয়ের মতোই মিষ্টি হোক।',
+    'আনন্দ, শান্তি আর শুভকামনা থাকুক সবসময়।'
   ],
   Dinajpur: [
-    'দিনাজপুরের প্রশান্তির মতো শান্তিময় হোক আপনার ঈদের সময়।',
-    'সুখ, ভালোবাসা আর বরকত থাকুক আপনার পরিবারে সবসময়।'
+    'দিনাজপুরের আবহে — তোমার ঈদ হোক প্রশান্তি, আপনজন আর ভালোবাসায় ভরা।',
+    'মনভরা সুখ আর আলো নেমে আসুক তোমার জীবনে।'
   ],
   Pabna: [
-    'পাবনার আন্তরিকতায় বলি — আপনার ঈদ হোক প্রশান্তি, সাফল্য আর সুখে ভরা।',
-    'এই উৎসব বয়ে আনুক নতুন আশা আর অনেক সুন্দর মুহূর্ত।'
+    'পাবনার ভাষায় — তোমার ঈদটা হোক আরামদায়ক, সুখের আর স্মরণীয়।',
+    'দোয়া করি, তোমার চারপাশ ভরে উঠুক আনন্দে।'
   ],
   Faridpur: [
-    'ফরিদপুরের মমতায় আপনার ঈদ হয়ে উঠুক উজ্জ্বল আর আনন্দে ভরা।',
-    'আপনার জন্য রইল ভালোবাসা, বরকত আর অফুরন্ত শুভকামনা।'
+    'ফরিদপুরের টানে — তোমার ঈদটা একদম সুন্দর আর মনভরা হোক।',
+    'অনেক দোয়া, অনেক মায়া আর ভরপুর খুশি রইল।'
   ],
   Kushtia: [
-    'কুষ্টিয়ার সুরের মতো মধুর হোক আপনার ঈদ আর জীবনের প্রতিটি দিন।',
-    'আনন্দ, ভালোবাসা আর আলোয় ভরে উঠুক আপনার চারপাশ।'
+    'কুষ্টিয়ার সুরে — তোমার ঈদটা হোক মধুর, শান্তির আর ভালোবাসায় ভরা।',
+    'জীবনের প্রতিটা দিন কাটুক আলো আর আনন্দে।'
   ],
   default: [
     'আপনার ঈদ হোক আনন্দ, দোয়া, ভালোবাসা আর অগণিত সুখে ভরা।',
@@ -150,12 +161,50 @@ function typeWriter(text) {
   typingTimer = setInterval(() => {
     typedWish.textContent += text.charAt(i);
     i++;
-
     if (i >= text.length) {
       clearInterval(typingTimer);
     }
   }, 34);
 }
+
+function getShareText() {
+  return `${savedName} from ${savedDistrict} received Digital Salami of ৳${currentAmount}. 🌙`;
+}
+
+function saveToLeaderboard() {
+  const entry = {
+    name: savedName,
+    district: savedDistrict,
+    amount: currentAmount,
+    time: new Date().toLocaleString()
+  };
+
+  const existing = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
+  existing.unshift(entry);
+  const latestSeven = existing.slice(0, 7);
+  localStorage.setItem('digitalSalamiLeaderboard', JSON.stringify(latestSeven));
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const list = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
+
+  if (!list.length) {
+    leaderboardList.innerHTML = `<div class="leaderboard-item"><span>এখনও কোন entry নেই</span></div>`;
+    return;
+  }
+
+  leaderboardList.innerHTML = list.map((item, index) => `
+    <div class="leaderboard-item">
+      <span>${index + 1}. ${item.name} • ${item.district}</span>
+      <strong>৳ ${item.amount}</strong>
+    </div>
+  `).join('');
+}
+
+startBtn.addEventListener('click', () => {
+  changePage(page0, page1);
+});
 
 saveInfoBtn.addEventListener('click', () => {
   const name = nameInput.value.trim();
@@ -234,10 +283,61 @@ openCardBtn.addEventListener('click', () => {
   wishCard.classList.add('show');
 
   const districtWish = getWishByDistrict(savedDistrict, currentAmount);
+  saveToLeaderboard();
 
   setTimeout(() => {
     typeWriter(districtWish);
   }, 1200);
+});
+
+shareBtn.addEventListener('click', async () => {
+  const text = getShareText();
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Digital Salami',
+        text
+      });
+    } catch (e) {}
+  } else {
+    alert('এই ডিভাইসে direct share support নেই। Copy Text ব্যবহার করুন।');
+  }
+});
+
+copyBtn.addEventListener('click', async () => {
+  const text = getShareText();
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy Text';
+    }, 1500);
+  } catch (e) {
+    alert('Copy করতে সমস্যা হয়েছে।');
+  }
+});
+
+whatsappBtn.addEventListener('click', () => {
+  const phone = phoneInput.value.trim();
+  const msg = messageInput.value.trim();
+
+  if (!phone) {
+    alert('আপনার ফোন নাম্বার দিন।');
+    return;
+  }
+
+  const finalMsg =
+`Digital Salami Contact Request
+
+Name: ${savedName}
+District: ${savedDistrict}
+Salami: ৳ ${currentAmount}
+User Phone: ${phone}
+Message: ${msg || 'No extra message'}`;
+
+  const url = `https://wa.me/61412652246?text=${encodeURIComponent(finalMsg)}`;
+  window.open(url, '_blank');
 });
 
 againBtn.addEventListener('click', () => {
@@ -248,6 +348,9 @@ againBtn.addEventListener('click', () => {
   wishCard.classList.remove('show');
   wishEnvelope.classList.remove('hidden');
 
+  phoneInput.value = '';
+  messageInput.value = '';
+
   slot1.textContent = '0';
   slot2.textContent = '0';
   slot3.textContent = '1';
@@ -257,3 +360,5 @@ againBtn.addEventListener('click', () => {
   resetPageForReuse(page3);
   page2.classList.add('active');
 });
+
+renderLeaderboard();
