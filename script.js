@@ -1,24 +1,25 @@
-const page0 = document.getElementById('page0');
 const page1 = document.getElementById('page1');
 const page2 = document.getElementById('page2');
 const page3 = document.getElementById('page3');
+const page4 = document.getElementById('page4');
 
-const startBtn = document.getElementById('startBtn');
+const goInfoBtn = document.getElementById('goInfoBtn');
+const saveInfoBtn = document.getElementById('saveInfoBtn');
+const spinBtn = document.getElementById('spinBtn');
 
 const nameInput = document.getElementById('nameInput');
 const districtInput = document.getElementById('districtInput');
-const saveInfoBtn = document.getElementById('saveInfoBtn');
 const welcomeBox = document.getElementById('welcomeBox');
+const statusText = document.getElementById('statusText');
 
-const spinBtn = document.getElementById('spinBtn');
 const slot1 = document.getElementById('slot1');
 const slot2 = document.getElementById('slot2');
 const slot3 = document.getElementById('slot3');
-const statusText = document.getElementById('statusText');
 
-const wishEnvelope = document.getElementById('wishEnvelope');
-const openCardBtn = document.getElementById('openCardBtn');
-const wishCard = document.getElementById('wishCard');
+const cardBox = document.getElementById('cardBox');
+const leaderboardBox = document.getElementById('leaderboardBox');
+const contactBox = document.getElementById('contactBox');
+const createdBy = document.getElementById('createdBy');
 
 const amountText = document.getElementById('amountText');
 const cardName = document.getElementById('cardName');
@@ -26,12 +27,8 @@ const cardDistrict = document.getElementById('cardDistrict');
 const typedWish = document.getElementById('typedWish');
 const resultText = document.getElementById('resultText');
 const cardGreeting = document.getElementById('cardGreeting');
-const againBtn = document.getElementById('againBtn');
 
-const shareBtn = document.getElementById('shareBtn');
-const copyBtn = document.getElementById('copyBtn');
 const leaderboardList = document.getElementById('leaderboardList');
-
 const phoneInput = document.getElementById('phoneInput');
 const messageInput = document.getElementById('messageInput');
 const whatsappBtn = document.getElementById('whatsappBtn');
@@ -39,10 +36,11 @@ const whatsappBtn = document.getElementById('whatsappBtn');
 let savedName = '';
 let savedDistrict = '';
 let currentAmount = 0;
-let rolling = false;
 let typingTimer = null;
+let rolling = false;
 
 const slotElements = [slot1, slot2, slot3];
+const spinLockKey = 'digital_salami_spin_used';
 
 const districtWishes = {
   Dhaka: [
@@ -132,20 +130,16 @@ function changePage(currentPage, nextPage) {
   }, 220);
 }
 
-function resetPageForReuse(page) {
-  page.classList.remove('active', 'exit-left');
-}
-
 function randomDigit() {
   return Math.floor(Math.random() * 10);
 }
 
 function startSlotAnimation() {
-  slotElements.forEach((slot) => slot.classList.add('spinning'));
+  slotElements.forEach(slot => slot.classList.add('spinning'));
 }
 
 function stopSlotAnimation() {
-  slotElements.forEach((slot) => slot.classList.remove('spinning'));
+  slotElements.forEach(slot => slot.classList.remove('spinning'));
 }
 
 function getWishByDistrict(district, amount) {
@@ -167,24 +161,6 @@ function typeWriter(text) {
   }, 34);
 }
 
-function getShareText() {
-  return `${savedName} from ${savedDistrict} received Digital Salami of ৳${currentAmount}. 🌙`;
-}
-
-function saveToLeaderboard() {
-  const entry = {
-    name: savedName,
-    district: savedDistrict,
-    amount: currentAmount
-  };
-
-  const existing = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
-  existing.unshift(entry);
-  const latestSeven = existing.slice(0, 7);
-  localStorage.setItem('digitalSalamiLeaderboard', JSON.stringify(latestSeven));
-  renderLeaderboard();
-}
-
 function renderLeaderboard() {
   const list = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
 
@@ -201,8 +177,42 @@ function renderLeaderboard() {
   `).join('');
 }
 
-startBtn.addEventListener('click', () => {
-  changePage(page0, page1);
+function saveToLeaderboard() {
+  const entry = {
+    name: savedName,
+    district: savedDistrict,
+    amount: currentAmount
+  };
+
+  const existing = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
+  existing.unshift(entry);
+  const latestSeven = existing.slice(0, 7);
+  localStorage.setItem('digitalSalamiLeaderboard', JSON.stringify(latestSeven));
+  renderLeaderboard();
+}
+
+function revealFinalFlow() {
+  cardBox.classList.remove('hidden');
+  cardBox.classList.add('show');
+
+  setTimeout(() => {
+    leaderboardBox.classList.remove('hidden');
+    leaderboardBox.classList.add('show');
+  }, 1200);
+
+  setTimeout(() => {
+    contactBox.classList.remove('hidden');
+    contactBox.classList.add('show');
+  }, 1600);
+
+  setTimeout(() => {
+    createdBy.classList.remove('hidden');
+    createdBy.classList.add('show');
+  }, 2000);
+}
+
+goInfoBtn.addEventListener('click', () => {
+  changePage(page1, page2);
 });
 
 saveInfoBtn.addEventListener('click', () => {
@@ -223,20 +233,26 @@ saveInfoBtn.addEventListener('click', () => {
   savedDistrict = district;
 
   welcomeBox.classList.remove('hidden');
-  welcomeBox.innerHTML = `<b>${savedName}</b> from <b>${savedDistrict}</b> — আপনাকে Digital Salami তে স্বাগতম।`;
+  welcomeBox.innerHTML = `<b>${savedName}</b> from <b>${savedDistrict}</b> — ready for spin ✨`;
 
   setTimeout(() => {
-    changePage(page1, page2);
+    changePage(page2, page3);
   }, 900);
 });
 
 spinBtn.addEventListener('click', () => {
-  if (!savedName || !savedDistrict || rolling) return;
+  if (rolling) return;
+
+  if (localStorage.getItem(spinLockKey) === 'used') {
+    statusText.textContent = 'আপনি ইতোমধ্যে একবার spin করেছেন। আবার করা যাবে না।';
+    spinBtn.disabled = true;
+    return;
+  }
 
   rolling = true;
   spinBtn.disabled = true;
   spinBtn.textContent = 'Spinning...';
-  statusText.textContent = 'আপনার জন্য ডিজিটাল সালামি তৈরি হচ্ছে...';
+  statusText.textContent = 'আপনার salami তৈরি হচ্ছে...';
 
   startSlotAnimation();
 
@@ -257,60 +273,28 @@ spinBtn.addEventListener('click', () => {
     slot2.textContent = formatted[1];
     slot3.textContent = formatted[2];
 
+    localStorage.setItem(spinLockKey, 'used');
+
     amountText.textContent = '৳ ' + currentAmount;
     cardName.textContent = savedName;
     cardDistrict.textContent = savedDistrict;
     cardGreeting.textContent = greetings[currentAmount % greetings.length];
-    resultText.textContent = `${savedName}, ${savedDistrict} এর জন্য নির্ধারিত Digital Salami হলো ৳ ${currentAmount}।`;
+    resultText.textContent = `${savedName}, ${savedDistrict} এর জন্য Digital Salami হলো ৳ ${currentAmount}।`;
 
-    rolling = false;
-    spinBtn.disabled = false;
-    spinBtn.textContent = 'Spin Again';
+    saveToLeaderboard();
 
     setTimeout(() => {
-      changePage(page2, page3);
+      changePage(page3, page4);
+
+      setTimeout(() => {
+        revealFinalFlow();
+        const districtWish = getWishByDistrict(savedDistrict, currentAmount);
+        setTimeout(() => {
+          typeWriter(districtWish);
+        }, 900);
+      }, 900);
     }, 700);
   }, 3000);
-});
-
-openCardBtn.addEventListener('click', () => {
-  wishEnvelope.classList.add('hidden');
-  wishCard.classList.remove('hidden');
-
-  const districtWish = getWishByDistrict(savedDistrict, currentAmount);
-  saveToLeaderboard();
-
-  setTimeout(() => {
-    typeWriter(districtWish);
-  }, 600);
-});
-
-shareBtn.addEventListener('click', async () => {
-  const text = getShareText();
-
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: 'Digital Salami',
-        text
-      });
-    } catch (e) {}
-  } else {
-    alert('এই ডিভাইসে direct share support নেই। Copy Text ব্যবহার করুন।');
-  }
-});
-
-copyBtn.addEventListener('click', async () => {
-  const text = getShareText();
-  try {
-    await navigator.clipboard.writeText(text);
-    copyBtn.textContent = 'Copied';
-    setTimeout(() => {
-      copyBtn.textContent = 'Copy Text';
-    }, 1500);
-  } catch (e) {
-    alert('Copy করতে সমস্যা হয়েছে।');
-  }
 });
 
 whatsappBtn.addEventListener('click', () => {
@@ -334,24 +318,9 @@ Message: ${msg || 'No extra message'}`;
   window.open(url, '_blank');
 });
 
-againBtn.addEventListener('click', () => {
-  clearInterval(typingTimer);
-
-  typedWish.textContent = '';
-  wishCard.classList.add('hidden');
-  wishEnvelope.classList.remove('hidden');
-
-  phoneInput.value = '';
-  messageInput.value = '';
-
-  slot1.textContent = '0';
-  slot2.textContent = '0';
-  slot3.textContent = '1';
-  statusText.textContent = 'সব প্রস্তুত। এখন ম্যাজিক স্পিন দিন ✨';
-
-  resetPageForReuse(page2);
-  resetPageForReuse(page3);
-  page2.classList.add('active');
-});
-
 renderLeaderboard();
+
+if (localStorage.getItem(spinLockKey) === 'used') {
+  spinBtn.disabled = true;
+  statusText.textContent = 'এই browser এ একবার spin already ব্যবহার করা হয়েছে।';
+}
