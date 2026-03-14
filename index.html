@@ -1,99 +1,109 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Salami</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
 
-  <main class="wrapper">
-    <section class="hero-card glass reveal reveal-1">
-      <div class="top-badge">EID SPECIAL EXPERIENCE</div>
-      <h1>Digital <span>Salami</span></h1>
-      <p class="hero-text">
-        নাম লিখুন, জেলা নির্বাচন করুন, প্রিমিয়াম ম্যাজিক স্লটে স্পিন দিন এবং একটি সুন্দর অ্যানিমেটেড শুভেচ্ছা কার্ডে আপনার ডিজিটাল সালামি গ্রহণ করুন।
-      </p>
+  <main class="app">
 
-      <div class="feature-grid">
-        <div class="feature-item reveal reveal-2">
-          <div class="feature-icon">✨</div>
-          <div>
-            <h3>Premium UI</h3>
-            <p>লাক্সারি ডার্ক থিম</p>
+    <!-- PAGE 1 -->
+    <section id="page1" class="page active">
+      <div class="page-card hero-card glass">
+        <div class="top-badge">EID SPECIAL EXPERIENCE</div>
+
+        <h1>Digital <span>Salami</span></h1>
+
+        <p class="hero-text">
+          নাম লিখুন, জেলা নির্বাচন করুন, তারপর ধাপে ধাপে এগিয়ে গিয়ে
+          প্রিমিয়াম ম্যাজিক স্লট থেকে আপনার ডিজিটাল সালামি এবং বিশেষ wish card গ্রহণ করুন।
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-item appear delay-1">
+            <div class="feature-icon">✨</div>
+            <div>
+              <h3>Premium UI</h3>
+              <p>লাক্সারি ডার্ক এক্সপেরিয়েন্স</p>
+            </div>
+          </div>
+
+          <div class="feature-item appear delay-2">
+            <div class="feature-icon">🎰</div>
+            <div>
+              <h3>Magic Spin</h3>
+              <p>র‍্যান্ডম সালামি ড্র</p>
+            </div>
+          </div>
+
+          <div class="feature-item appear delay-3">
+            <div class="feature-icon">💌</div>
+            <div>
+              <h3>Wish Card</h3>
+              <p>অ্যানিমেটেড প্রিমিয়াম শুভেচ্ছা</p>
+            </div>
           </div>
         </div>
-        <div class="feature-item reveal reveal-3">
-          <div class="feature-icon">🎰</div>
-          <div>
-            <h3>Magic Spin</h3>
-            <p>র‍্যান্ডম সালামি ড্র</p>
+
+        <div class="form-box appear delay-4">
+          <div class="panel-header">
+            <p class="mini-title">STEP 01</p>
+            <h2>আপনার তথ্য দিন</h2>
           </div>
-        </div>
-        <div class="feature-item reveal reveal-4">
-          <div class="feature-icon">💌</div>
-          <div>
-            <h3>Wish Card</h3>
-            <p>ফটো-কার্ড স্টাইল শুভেচ্ছা</p>
-          </div>
+
+          <label class="input-label">আপনার নাম</label>
+          <input id="nameInput" type="text" placeholder="যেমন: Rakib" />
+
+          <label class="input-label">আপনার জেলা</label>
+          <select id="districtInput">
+            <option value="">জেলা নির্বাচন করুন</option>
+            <option>Dhaka</option>
+            <option>Chattogram</option>
+            <option>Sylhet</option>
+            <option>Rajshahi</option>
+            <option>Khulna</option>
+            <option>Barishal</option>
+            <option>Rangpur</option>
+            <option>Mymensingh</option>
+            <option>Cumilla</option>
+            <option>Noakhali</option>
+            <option>Jessore</option>
+            <option>Bogra</option>
+            <option>Dinajpur</option>
+            <option>Pabna</option>
+            <option>Faridpur</option>
+            <option>Kushtia</option>
+          </select>
+
+          <button id="saveInfoBtn" class="btn btn-gold">Continue</button>
+          <div id="welcomeBox" class="welcome-box hidden"></div>
         </div>
       </div>
     </section>
 
-    <section class="content-grid">
-      <div class="glass form-panel reveal reveal-5">
-        <div class="panel-header">
-          <p class="mini-title">STEP 01</p>
-          <h2>আপনার তথ্য দিন</h2>
-        </div>
-
-        <label class="input-label">আপনার নাম</label>
-        <input id="nameInput" type="text" placeholder="যেমন: Rakib">
-
-        <label class="input-label">আপনার জেলা</label>
-        <select id="districtInput">
-          <option value="">জেলা নির্বাচন করুন</option>
-          <option>Dhaka</option>
-          <option>Chattogram</option>
-          <option>Sylhet</option>
-          <option>Rajshahi</option>
-          <option>Khulna</option>
-          <option>Barishal</option>
-          <option>Rangpur</option>
-          <option>Mymensingh</option>
-          <option>Cumilla</option>
-          <option>Noakhali</option>
-          <option>Jessore</option>
-          <option>Bogra</option>
-          <option>Dinajpur</option>
-          <option>Pabna</option>
-          <option>Faridpur</option>
-          <option>Kushtia</option>
-        </select>
-
-        <button id="saveInfoBtn" class="btn btn-gold">Continue</button>
-
-        <div id="welcomeBox" class="welcome-box hidden"></div>
-      </div>
-
-      <div class="glass spin-panel reveal reveal-6">
-        <div class="panel-header">
+    <!-- PAGE 2 -->
+    <section id="page2" class="page">
+      <div class="page-card spin-card glass">
+        <div class="panel-header center appear delay-1">
           <p class="mini-title">STEP 02</p>
           <h2>Magic Slot Spin</h2>
+          <p class="panel-subtitle">
+            আপনার ডিজিটাল সালামি জানতে নিচের স্লটে স্পিন দিন
+          </p>
         </div>
 
-        <p class="panel-subtitle">আপনার ডিজিটাল সালামি জানতে নিচের স্লটে স্পিন দিন</p>
-
-        <div class="slot-machine">
+        <div class="slot-machine appear delay-2">
           <div class="slot-frame">
             <div class="slot" id="slot1">0</div>
             <div class="slot" id="slot2">0</div>
@@ -103,63 +113,65 @@
           <div class="slot-glow"></div>
         </div>
 
-        <button id="spinBtn" class="btn btn-premium" disabled>Spin for Salami</button>
-
-        <div id="statusText" class="status-text">নাম এবং জেলা দেওয়ার পর স্পিন চালু হবে</div>
+        <button id="spinBtn" class="btn btn-premium appear delay-3">Spin for Salami</button>
+        <div id="statusText" class="status-text appear delay-4">সব প্রস্তুত। এখন ম্যাজিক স্পিন দিন ✨</div>
       </div>
     </section>
 
-    <section id="wishSection" class="wish-section hidden">
-      <div class="wish-envelope glass envelope-enter" id="wishEnvelope">
-        <div class="envelope-top"></div>
-        <div class="envelope-body">
-          <p>আপনার জন্য একটি বিশেষ ঈদ শুভেচ্ছা কার্ড প্রস্তুত হয়েছে</p>
-          <button id="openCardBtn" class="btn btn-soft">Open Wish Card</button>
-        </div>
-      </div>
-
-      <div id="wishCard" class="wish-card glass hidden card-enter">
-        <div class="wish-card-glow"></div>
-        <div class="wish-card-header">
-          <div>
-            <p class="mini-title gold-text">DIGITAL SALAMI CARD</p>
-            <h2 id="cardGreeting">ঈদ মোবারক</h2>
-          </div>
-          <div class="moon-icon">🌙</div>
-        </div>
-
-        <div class="wish-photo-area photo-enter">
-          <div class="wish-photo-overlay"></div>
-          <div class="wish-photo-content">
-            <p class="script-text">Celebrating Joy, Blessings & Smiles</p>
-            <div class="amount-pill" id="amountText">৳ 0</div>
+    <!-- PAGE 3 -->
+    <section id="page3" class="page">
+      <div class="page-card wish-page glass">
+        <div id="wishEnvelope" class="wish-envelope">
+          <div class="envelope-top"></div>
+          <div class="envelope-body">
+            <p>আপনার জন্য একটি বিশেষ ঈদ শুভেচ্ছা কার্ড প্রস্তুত হয়েছে</p>
+            <button id="openCardBtn" class="btn btn-soft">Open Wish Card</button>
           </div>
         </div>
 
-        <div class="wish-meta">
-          <div class="meta-box meta-enter meta-delay-1">
-            <span>নাম</span>
-            <strong id="cardName">—</strong>
-          </div>
-          <div class="meta-box meta-enter meta-delay-2">
-            <span>জেলা</span>
-            <strong id="cardDistrict">—</strong>
-          </div>
-        </div>
+        <div id="wishCard" class="wish-card hidden">
+          <div class="wish-card-glow"></div>
 
-        <div class="typed-line-wrap typed-enter">
-          <span class="typed-label">Special Wish</span>
-          <p id="typedWish" class="typed-wish"></p>
-        </div>
+          <div class="wish-card-header card-part part-1">
+            <div>
+              <p class="mini-title gold-text">DIGITAL SALAMI CARD</p>
+              <h2 id="cardGreeting">ঈদ মোবারক</h2>
+            </div>
+            <div class="moon-icon">🌙</div>
+          </div>
 
-        <div class="wish-footer footer-enter">
-          <p id="resultText">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
-          <button id="againBtn" class="btn btn-outline">Spin Again</button>
+          <div class="wish-photo-area card-part part-2">
+            <div class="wish-photo-overlay"></div>
+            <div class="wish-photo-content">
+              <p class="script-text">Celebrating Joy, Blessings & Smiles</p>
+              <div class="amount-pill" id="amountText">৳ 0</div>
+            </div>
+          </div>
+
+          <div class="wish-meta">
+            <div class="meta-box card-part part-3">
+              <span>নাম</span>
+              <strong id="cardName">—</strong>
+            </div>
+            <div class="meta-box card-part part-4">
+              <span>জেলা</span>
+              <strong id="cardDistrict">—</strong>
+            </div>
+          </div>
+
+          <div class="typed-line-wrap card-part part-5">
+            <span class="typed-label">Special Wish</span>
+            <p id="typedWish" class="typed-wish"></p>
+          </div>
+
+          <div class="wish-footer card-part part-6">
+            <p id="resultText">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
+            <button id="againBtn" class="btn btn-outline">Spin Again</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer-text reveal reveal-7">Digital Salami • Premium Eid Experience</footer>
   </main>
 
   <script src="script.js"></script>
