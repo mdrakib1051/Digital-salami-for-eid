@@ -1,88 +1,73 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Salami | Md Rakib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Salami | Md Rakib</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Rubik:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="loaderOverlay" class="loader-overlay hidden">
-    <div class="spinner">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
-  </div>
 
-  <div class="bg-glow"></div>
-
-  <main class="app">
-    <section id="page1" class="page active">
-      <div class="center-wrap">
-        <div class="panel">
-          <p class="badge">EID 2026</p>
-          <h1 class="main-title">Digital <span>Salami</span></h1>
-          <button id="goInfoBtn" class="premium-btn">শুরু করুন</button>
+    <div id="loaderOverlay" class="loader-overlay hidden">
+        <div class="spinner">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
         </div>
-      </div>
+    </div>
+
+    <section id="page1" class="page active">
+        <div class="container">
+            <h1 style="color:white; margin-bottom:20px; font-family:'Hind Siliguri'">ডিজিটাল সালামি ২০২৬</h1>
+            <button id="startBtn" class="button">
+                <div><div><div><div>শুরু করুন</div></div></div></div>
+            </button>
+        </div>
     </section>
 
     <section id="page2" class="page">
-      <div class="center-wrap">
-        <div class="panel">
-          <h2 class="title">আপনার তথ্য</h2>
-          <div class="input-container">
-            <input id="nameInput" type="text" placeholder="আপনার নাম..." class="custom-input">
-          </div>
-          <select id="districtInput" class="custom-select">
-            <option value="">জেলা বেছে নিন</option>
-            <option value="Dhaka">ঢাকা</option>
-            <option value="Chattogram">চট্টগ্রাম</option>
-            <option value="Noakhali">নোয়াখালী</option>
-            <option value="Sylhet">সিলেট</option>
-          </select>
-          <button id="saveInfoBtn" class="premium-btn">চালিয়ে যান</button>
+        <div class="container">
+            <div id="poda">
+                <div id="main">
+                    <div class="glow"></div><div class="darkBorderBg"></div><div class="white"></div><div class="border"></div>
+                    <input id="nameInput" class="input" type="text" placeholder="আপনার নাম লিখুন...">
+                    <div id="input-mask"></div><div id="pink-mask"></div>
+                </div>
+            </div>
+            <button id="infoNextBtn" class="button" style="margin-top: 30px;">
+                <div><div><div><div>চালিয়ে যান</div></div></div></div>
+            </button>
         </div>
-      </div>
     </section>
 
     <section id="page3" class="page">
-      <div class="center-wrap">
-        <div class="panel">
-          <div class="slot-machine">
-            <div class="slot" id="slot1">0</div>
-            <div class="slot" id="slot2">0</div>
-            <div class="slot" id="slot3">0</div>
-          </div>
-          <button id="spinBtn" class="premium-btn">SPIN NOW 🎰</button>
+        <div class="container">
+            <div class="card" id="cardBox">
+                <div class="content">
+                    <div class="back">
+                        <div class="back-content">
+                            <div class="circle"></div><div class="circle" id="bottom"></div><div class="circle" id="right"></div>
+                            <strong style="font-family: 'Hind Siliguri'">সালামি কার্ড</strong>
+                            <small>ফ্লিপ করতে টাচ করুন</small>
+                        </div>
+                    </div>
+                    <div class="front">
+                        <div class="front-content">
+                            <div class="badge">EID SPECIAL</div>
+                            <div class="description">
+                                <div class="title">
+                                    <p id="resName" style="font-weight: bold;"></p>
+                                </div>
+                                <div style="font-size: 24px; color: #ffbb66; margin: 10px 0;">৳ <span id="resAmt"></span></div>
+                                <p class="card-footer">Digital Salami • Md Rakib</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="page4" class="page">
-      <div class="center-wrap scrollable">
-        <div class="card-3d" id="cardBox">
-          <div class="card-content">
-            <div class="card-front">
-              <h3>সালামি কার্ড</h3>
-              <p>ফ্লিপ করতে টাচ করুন</p>
-            </div>
-            <div class="card-back">
-              <h2 id="finalName">Rakib</h2>
-              <div class="amount-tag">৳ <span id="finalAmount">0</span></div>
-              <p id="finalWish"></p>
-            </div>
-          </div>
-        </div>
-        <div class="leaderboard">
-          <h3>Top Winners 🏆</h3>
-          <div id="leaderboardList"></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
