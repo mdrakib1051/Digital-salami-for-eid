@@ -1,326 +1,133 @@
-const page1 = document.getElementById('page1');
-const page2 = document.getElementById('page2');
-const page3 = document.getElementById('page3');
-const page4 = document.getElementById('page4');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push, onValue, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const goInfoBtn = document.getElementById('goInfoBtn');
-const saveInfoBtn = document.getElementById('saveInfoBtn');
-const spinBtn = document.getElementById('spinBtn');
-
-const nameInput = document.getElementById('nameInput');
-const districtInput = document.getElementById('districtInput');
-const welcomeBox = document.getElementById('welcomeBox');
-const statusText = document.getElementById('statusText');
-
-const slot1 = document.getElementById('slot1');
-const slot2 = document.getElementById('slot2');
-const slot3 = document.getElementById('slot3');
-
-const cardBox = document.getElementById('cardBox');
-const leaderboardBox = document.getElementById('leaderboardBox');
-const contactBox = document.getElementById('contactBox');
-const createdBy = document.getElementById('createdBy');
-
-const amountText = document.getElementById('amountText');
-const cardName = document.getElementById('cardName');
-const cardDistrict = document.getElementById('cardDistrict');
-const typedWish = document.getElementById('typedWish');
-const resultText = document.getElementById('resultText');
-const cardGreeting = document.getElementById('cardGreeting');
-
-const leaderboardList = document.getElementById('leaderboardList');
-const phoneInput = document.getElementById('phoneInput');
-const messageInput = document.getElementById('messageInput');
-const whatsappBtn = document.getElementById('whatsappBtn');
-
-let savedName = '';
-let savedDistrict = '';
-let currentAmount = 0;
-let typingTimer = null;
-let rolling = false;
-
-const slotElements = [slot1, slot2, slot3];
-const spinLockKey = 'digital_salami_spin_used';
-
-const districtWishes = {
-  Dhaka: [
-    'ঢাহাইয়া ঢঙে কই — তোমার ঈদটা জোসস হোক, সুখে-শান্তিতে ভইরা যাক সবকিছু।',
-    'এইডা তোমার লাইগা অনেক আদর, দোয়া আর মনের খুশি নিয়া পাঠাইলাম।'
-  ],
-  Chattogram: [
-    'চাটগাঁইয়া কই — তুমার ঈদডা অনেক ফুর্তির আর বরকতের অইক, আল্লাহ ভালে রাখুক।',
-    'তুমার লাইগা রইল অনেক দোয়া, সুখ-শান্তি আর মনভরা খুশির সালাম।'
-  ],
-  Sylhet: [
-    'সিলেটি ঢঙে কই — তুমার ঈদখান মজা আর রহমতে ভইরা যাউক।',
-    'আল্লাহ তুমারে সুখে রাখউক, আর মনত নামউক শান্তি আর খুশি।'
-  ],
-  Rajshahi: [
-    'রাজশাহীর মিঠা ভাষায় — তোমার ঈদ আমের মতোই মিষ্টি হোক।',
-    'সুখ, শান্তি আর ভালোবাসায় ভরে উঠুক তোমার প্রতিটা দিন।'
-  ],
-  Khulna: [
-    'খুলনার টানে বলি — তোমার ঈদটা হোক আরাম, আনন্দ আর আপন মানুষের ভালোবাসায় ভরা।',
-    'তোমার জীবনে আসুক শান্তি, বরকত আর মনভরা হাসি।'
-  ],
-  Barishal: [
-    'বরিশালের ভাষায় কই — তোমার ঈদডা নদীর হাওয়ার মতন ঠাণ্ডা শান্তি নিয়া আইব।',
-    'ভালোবাসা আর আনন্দে ভইরা যাক তুমার ঘরদুয়ার।'
-  ],
-  Rangpur: [
-    'রংপুরিয়া মেজাজে — তোর ঈদডা খুবই ফাটাফাটি আর সুখের হউক।',
-    'দোয়া করি, তোর জীবনডা খুশি আর বরকতে ভইরা উঠুক।'
-  ],
-  Mymensingh: [
-    'ময়মনসিংহের টানে — তোমার ঈদটা হোক নরম, মিষ্টি আর আপন সুখে ভরা।',
-    'পরিবার আর প্রিয় মানুষদের সাথে কাটুক দারুণ সব সময়।'
-  ],
-  Cumilla: [
-    'কুমিল্লার আপন ভাষায় — তোমার ঈদ হোক সুখের, মনের আরাম আর ভালোবাসার।',
-    'এই সালামির সাথে রইল ভুরিভুরি শুভেচ্ছা আর অনেক দোয়া।'
-  ],
-  Noakhali: [
-    'নোয়াখাইল্লা টানে কই — তুমার ঈদডা অনেক সুন্দর অইক, সুখে শান্তিতে যাক।',
-    'ঘরভর্তি খুশি, মায়া আর বরকত লইয়া আসুক এই ঈদ।'
-  ],
-  Jessore: [
-    'যশোরের আপন টানে — তোমার ঈদ হোক রঙিন, হাসিখুশি আর স্মরণীয়।',
-    'ভালোবাসা আর শান্তিতে ভরে উঠুক তোমার জীবন।'
-  ],
-  Bogra: [
-    'বগুড়ার মিঠা ঢঙে — তোমার ঈদটা দইয়ের মতোই মিষ্টি হোক।',
-    'আনন্দ, শান্তি আর শুভকামনা থাকুক সবসময়।'
-  ],
-  Dinajpur: [
-    'দিনাজপুরের আবহে — তোমার ঈদ হোক প্রশান্তি, আপনজন আর ভালোবাসায় ভরা।',
-    'মনভরা সুখ আর আলো নেমে আসুক তোমার জীবনে।'
-  ],
-  Pabna: [
-    'পাবনার ভাষায় — তোমার ঈদটা হোক আরামদায়ক, সুখের আর স্মরণীয়।',
-    'দোয়া করি, তোমার চারপাশ ভরে উঠুক আনন্দে।'
-  ],
-  Faridpur: [
-    'ফরিদপুরের টানে — তোমার ঈদটা একদম সুন্দর আর মনভরা হোক।',
-    'অনেক দোয়া, অনেক মায়া আর ভরপুর খুশি রইল।'
-  ],
-  Kushtia: [
-    'কুষ্টিয়ার সুরে — তোমার ঈদটা হোক মধুর, শান্তির আর ভালোবাসায় ভরা।',
-    'জীবনের প্রতিটা দিন কাটুক আলো আর আনন্দে।'
-  ],
-  default: [
-    'আপনার ঈদ হোক আনন্দ, দোয়া, ভালোবাসা আর অগণিত সুখে ভরা।',
-    'চাঁদের আলো আর ঈদের খুশি ছড়িয়ে পড়ুক আপনার জীবনের প্রতিটি দিনে।'
-  ]
+// --- ফায়ারবেস কনফিগ (এখানে তোমার কনফিগ বসাবে) ---
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_ID",
+  appId: "YOUR_APP_ID"
 };
 
-const greetings = [
-  'ঈদ মোবারক',
-  'শুভ ঈদ',
-  'Blessed Eid Wishes',
-  'Warm Eid Greetings',
-  'Joyful Eid Moments'
-];
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const leaderboardRef = ref(db, 'leaderboard');
 
-function changePage(currentPage, nextPage) {
-  currentPage.classList.remove('active');
-  currentPage.classList.add('exit-left');
+let savedName = '', savedDistrict = '', currentAmount = 0, rolling = false;
+
+// আঞ্চলিক উইশ লিস্ট
+const districtWishes = {
+  Dhaka: "খাওয়ায়-দাওয়ায় তোমার ঈদটা পুরান ঢাকার বাকরখানির মতই খাস্তা আর মিষ্টি হোক! ঈদ মোবারক!",
+  Chattogram: "চাটগাঁইয়া পোয়া-মাইয়াদের ঈদ মানেই তো ফুর্তি! মেজবানি স্টাইলে ঈদ কাটাও, আল্লাহ তোয়ারে ভালে রাখুক।",
+  Sylhet: "আফনার ঈদখান আমরার সিলেটি চায়ের মতই আরামদায়ক আর মিষ্টি হউক। আল্লাহ আফনারে খুশিতে রাখউক্কা।",
+  Barishal: "মোগো বরিশালের পোলা-মাইয়ারা সব সময়ই সেরা। ঈদডা একদম জমজমাট কইরা কাটাও!",
+  Noakhali: "তুমার ঈদডা জুইত কইরা কাটুক, সুখে-শান্তিতে থাকো। নোয়াখাইল্লা ত্যাজে ঈদ ফাডায় ফেলো!",
+  Cumilla: "কুমিল্লার খদ্দরের মতই তোমার ঈদটা স্নিগ্ধ আর রসমালাইয়ের মত মিষ্টি হোক।",
+  Rajshahi: "রাজশাহীর আমের মতই মিষ্টি একটা ঈদ উপহার দিচ্ছি তোমাকে। খুশিতে ভরে উঠুক তোমার মন।",
+  Khulna: "সুন্দরবনের স্নিগ্ধতা আর খুলনার আতিথেয়তায় ভরে উঠুক তোমার এবারের ঈদ।",
+  default: "চাঁদের আলো আর ঈদের খুশি ছড়িয়ে পড়ুক আপনার জীবনের প্রতিটি দিনে। ঈদ মোবারক!"
+};
+
+// পেজ চেঞ্জ ফাংশন
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ইভেন্ট লিসেনারস
+document.getElementById('goInfoBtn').addEventListener('click', () => showPage('page2'));
+
+document.getElementById('saveInfoBtn').addEventListener('click', () => {
+  savedName = document.getElementById('nameInput').value.trim();
+  savedDistrict = document.getElementById('districtInput').value;
+  if (!savedName || !savedDistrict) return alert("দয়া করে নাম এবং জেলা সঠিক ভাবে দিন!");
+  
+  document.getElementById('welcomeBox').classList.remove('hidden');
+  document.getElementById('welcomeBox').innerHTML = `স্বাগতম <b>${savedName}</b>! স্পিন করার জন্য প্রস্তুত হন।`;
+  setTimeout(() => showPage('page3'), 1200);
+});
+
+document.getElementById('spinBtn').addEventListener('click', () => {
+  if (rolling) return;
+  rolling = true;
+  document.getElementById('spinBtn').disabled = true;
+  const slots = [document.getElementById('slot1'), document.getElementById('slot2'), document.getElementById('slot3')];
+  
+  slots.forEach(s => s.classList.add('spinning'));
+  let spinCount = 0;
+  let spinInterval = setInterval(() => {
+    slots.forEach(s => s.textContent = Math.floor(Math.random() * 10));
+    spinCount++;
+    if (spinCount > 20) {
+      clearInterval(spinInterval);
+      finalizeSpin(slots);
+    }
+  }, 100);
+});
+
+function finalizeSpin(slots) {
+  currentAmount = Math.floor(Math.random() * 900) + 100;
+  const amtStr = String(currentAmount);
+  slots.forEach((s, i) => {
+    s.classList.remove('spinning');
+    s.textContent = amtStr[i];
+  });
+
+  // ফায়ারবেসে ডাটা সেভ করা (পাবলিক লিডারবোর্ড)
+  push(leaderboardRef, { name: savedName, district: savedDistrict, amount: currentAmount });
 
   setTimeout(() => {
-    nextPage.classList.add('active');
-  }, 220);
+    showPage('page4');
+    renderCard();
+  }, 1000);
 }
 
-function randomDigit() {
-  return Math.floor(Math.random() * 10);
-}
+function renderCard() {
+  document.getElementById('cardName').textContent = savedName;
+  document.getElementById('cardDistrict').textContent = savedDistrict;
+  document.getElementById('amountText').textContent = '৳ ' + currentAmount;
+  document.getElementById('cardBox').classList.remove('hidden');
+  document.getElementById('leaderboardBox').classList.remove('hidden');
+  document.getElementById('shareBox').classList.remove('hidden');
+  document.getElementById('createdBy').classList.remove('hidden');
 
-function startSlotAnimation() {
-  slotElements.forEach(slot => slot.classList.add('spinning'));
-}
-
-function stopSlotAnimation() {
-  slotElements.forEach(slot => slot.classList.remove('spinning'));
-}
-
-function getWishByDistrict(district, amount) {
-  const list = districtWishes[district] || districtWishes.default;
-  return list[amount % list.length];
+  const wish = districtWishes[savedDistrict] || districtWishes.default;
+  typeWriter(wish);
 }
 
 function typeWriter(text) {
-  clearInterval(typingTimer);
-  typedWish.textContent = '';
-  let i = 0;
-
-  typingTimer = setInterval(() => {
-    typedWish.textContent += text.charAt(i);
-    i++;
-    if (i >= text.length) {
-      clearInterval(typingTimer);
-    }
-  }, 34);
+  const el = document.getElementById('typedWish');
+  el.textContent = ''; let i = 0;
+  let timer = setInterval(() => {
+    el.textContent += text.charAt(i); i++;
+    if (i >= text.length) clearInterval(timer);
+  }, 50);
 }
 
-function renderLeaderboard() {
-  const list = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
-
-  if (!list.length) {
-    leaderboardList.innerHTML = `<div class="leaderboard-item"><span>এখনও কোন entry নেই</span></div>`;
-    return;
-  }
-
-  leaderboardList.innerHTML = list.map((item, index) => `
+// রিয়েল-টাইম লিডারবোর্ড আপডেট
+const q = query(leaderboardRef, limitToLast(7));
+onValue(q, (snapshot) => {
+  const data = snapshot.val();
+  const list = document.getElementById('leaderboardList');
+  if (!data) { list.innerHTML = "No winners yet!"; return; }
+  list.innerHTML = Object.values(data).reverse().map(item => `
     <div class="leaderboard-item">
-      <span>${index + 1}. ${item.name} • ${item.district}</span>
+      <span>${item.name} (${item.district})</span>
       <strong>৳ ${item.amount}</strong>
     </div>
   `).join('');
-}
-
-function saveToLeaderboard() {
-  const entry = {
-    name: savedName,
-    district: savedDistrict,
-    amount: currentAmount
-  };
-
-  const existing = JSON.parse(localStorage.getItem('digitalSalamiLeaderboard') || '[]');
-  existing.unshift(entry);
-  const latestSeven = existing.slice(0, 7);
-  localStorage.setItem('digitalSalamiLeaderboard', JSON.stringify(latestSeven));
-  renderLeaderboard();
-}
-
-function revealFinalFlow() {
-  cardBox.classList.remove('hidden');
-  cardBox.classList.add('show');
-
-  setTimeout(() => {
-    leaderboardBox.classList.remove('hidden');
-    leaderboardBox.classList.add('show');
-  }, 1200);
-
-  setTimeout(() => {
-    contactBox.classList.remove('hidden');
-    contactBox.classList.add('show');
-  }, 1600);
-
-  setTimeout(() => {
-    createdBy.classList.remove('hidden');
-    createdBy.classList.add('show');
-  }, 2000);
-}
-
-goInfoBtn.addEventListener('click', () => {
-  changePage(page1, page2);
 });
 
-saveInfoBtn.addEventListener('click', () => {
-  const name = nameInput.value.trim();
-  const district = districtInput.value.trim();
-
-  if (!name) {
-    alert('আগে আপনার নাম লিখুন।');
-    return;
+// সোশ্যাল শেয়ার
+window.shareSocial = function(platform) {
+  const msg = `আমি জিতেছি ৳${currentAmount} ডিজিটাল সালামি! আপনারটা চেক করুন এই লিঙ্কে: ${window.location.href}`;
+  if (platform === 'fb') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
+  if (platform === 'wa') window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+  if (platform === 'copy') {
+    navigator.clipboard.writeText(msg);
+    alert("লিঙ্ক কপি হয়েছে! এখন বন্ধুদের পাঠান।");
   }
-
-  if (!district) {
-    alert('আপনার জেলা নির্বাচন করুন।');
-    return;
-  }
-
-  savedName = name;
-  savedDistrict = district;
-
-  welcomeBox.classList.remove('hidden');
-  welcomeBox.innerHTML = `<b>${savedName}</b> from <b>${savedDistrict}</b> — ready for spin ✨`;
-
-  setTimeout(() => {
-    changePage(page2, page3);
-  }, 900);
-});
-
-spinBtn.addEventListener('click', () => {
-  if (rolling) return;
-
-  if (localStorage.getItem(spinLockKey) === 'used') {
-    statusText.textContent = 'আপনি ইতোমধ্যে একবার spin করেছেন। আবার করা যাবে না।';
-    spinBtn.disabled = true;
-    return;
-  }
-
-  rolling = true;
-  spinBtn.disabled = true;
-  spinBtn.textContent = 'Spinning...';
-  statusText.textContent = 'আপনার salami তৈরি হচ্ছে...';
-
-  startSlotAnimation();
-
-  const spinInterval = setInterval(() => {
-    slot1.textContent = randomDigit();
-    slot2.textContent = randomDigit();
-    slot3.textContent = randomDigit();
-  }, 90);
-
-  currentAmount = Math.floor(Math.random() * 100) + 1;
-  const formatted = String(currentAmount).padStart(3, '0');
-
-  setTimeout(() => {
-    clearInterval(spinInterval);
-    stopSlotAnimation();
-
-    slot1.textContent = formatted[0];
-    slot2.textContent = formatted[1];
-    slot3.textContent = formatted[2];
-
-    localStorage.setItem(spinLockKey, 'used');
-
-    amountText.textContent = '৳ ' + currentAmount;
-    cardName.textContent = savedName;
-    cardDistrict.textContent = savedDistrict;
-    cardGreeting.textContent = greetings[currentAmount % greetings.length];
-    resultText.textContent = `${savedName}, ${savedDistrict} এর জন্য Digital Salami হলো ৳ ${currentAmount}।`;
-
-    saveToLeaderboard();
-
-    setTimeout(() => {
-      changePage(page3, page4);
-
-      setTimeout(() => {
-        revealFinalFlow();
-        const districtWish = getWishByDistrict(savedDistrict, currentAmount);
-        setTimeout(() => {
-          typeWriter(districtWish);
-        }, 900);
-      }, 900);
-    }, 700);
-  }, 3000);
-});
-
-whatsappBtn.addEventListener('click', () => {
-  const phone = phoneInput.value.trim();
-  const msg = messageInput.value.trim();
-
-  if (!phone) {
-    alert('আপনার ফোন নাম্বার দিন।');
-    return;
-  }
-
-  const finalMsg = `Digital Salami Contact Request
-
-Name: ${savedName}
-District: ${savedDistrict}
-Salami: ৳ ${currentAmount}
-User Phone: ${phone}
-Message: ${msg || 'No extra message'}`;
-
-  const url = `https://wa.me/61412652246?text=${encodeURIComponent(finalMsg)}`;
-  window.open(url, '_blank');
-});
-
-renderLeaderboard();
-
-if (localStorage.getItem(spinLockKey) === 'used') {
-  spinBtn.disabled = true;
-  statusText.textContent = 'এই browser এ একবার spin already ব্যবহার করা হয়েছে।';
-}
+};
