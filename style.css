@@ -1,29 +1,32 @@
-/* --- MD RAKIB'S PREMIUM OVERRIDES --- */
-
-/* 1. Domino Loader */
-.loader-overlay {
-  position: fixed; inset: 0; background: rgba(5, 7, 13, 0.95);
-  z-index: 9999; display: flex; align-items: center; justify-content: center;
+/* Rakib's Original Styles + New Updates */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg1: #05070d; --bg2: #0d1220; --glass: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.1); --gold: #ffd56a; --gold2: #ffb300;
+  --text: #f7f8fb; --muted: #b7c1d8; --shadow: 0 20px 70px rgba(0, 0, 0, 0.45);
 }
+
+body {
+  font-family: 'Hind Siliguri', sans-serif; color: var(--text);
+  background: radial-gradient(circle at top left, rgba(255, 190, 11, 0.12), transparent 24%), linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg1));
+  width: 100%; min-height: 100vh; overflow-x: hidden;
+}
+
+/* Domino Loader Styling */
+.loader-overlay { position: fixed; inset: 0; background: rgba(5,7,13,0.9); z-index: 9999; display: flex; align-items: center; justify-content: center; }
 .spinner { position: relative; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; }
-.spinner span { position: absolute; width: 40px; height: 8px; background: var(--gold2); animation: dominos 1s ease infinite; border-radius: 4px; }
+.spinner span { position: absolute; width: 35px; height: 7px; background: var(--gold); animation: dominos 1s ease infinite; border-radius: 4px; }
 .spinner span:nth-child(1) { left: 60px; animation-delay: 0.125s; }
-.spinner span:nth-child(2) { left: 50px; animation-delay: 0.3s; }
-.spinner span:nth-child(3) { left: 40px; animation-delay: 0.425s; }
-.spinner span:nth-child(4) { left: 30px; animation-delay: 0.54s; }
-.spinner span:nth-child(5) { left: 20px; animation-delay: 0.665s; }
-.spinner span:nth-child(6) { left: 10px; animation-delay: 0.79s; }
-.spinner span:nth-child(7) { left: 0px; animation-delay: 0.915s; }
-.spinner span:nth-child(8) { left: -10px; animation-delay: 1.04s; }
+.spinner span:nth-child(2) { left: 45px; animation-delay: 0.3s; }
+.spinner span:nth-child(3) { left: 30px; animation-delay: 0.425s; }
+.spinner span:nth-child(4) { left: 15px; animation-delay: 0.54s; }
 @keyframes dominos { 50% { opacity: 0.7; } 75% { transform: rotate(90deg); } 80% { opacity: 1; } }
 
-/* 2. Conic Search Input */
-#poda { display: flex; align-items: center; justify-content: center; position: relative; margin: 15px 0; }
-.input {
-  background-color: #010201; border: none; width: 100%; max-width: 310px; height: 56px;
-  border-radius: 10px; color: white; padding-inline: 20px; font-size: 18px; position: relative; z-index: 5;
-}
-.glow, .darkBorderBg, .white, .border { position: absolute; width: 320px; height: 66px; z-index: 1; border-radius: 12px; filter: blur(2px); }
+/* Conic Input Container */
+#poda { display: flex; align-items: center; justify-content: center; position: relative; margin: 15px 0; width: 100%; }
+#main-input-box { position: relative; width: 100%; max-width: 320px; height: 56px; }
+.input { background-color: #010201 !important; border: none !important; width: 100% !important; height: 56px !important; border-radius: 10px; color: white; padding-inline: 20px; position: relative; z-index: 5; }
+.glow, .darkBorderBg, .white, .border { position: absolute; width: 100%; height: 100%; z-index: 1; border-radius: 12px; filter: blur(2px); }
 .white::before {
   content: ""; position: absolute; width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%);
   background-image: conic-gradient(transparent 0%, #a099d8, transparent 8%, transparent 50%, #dfa2da, transparent 58%);
@@ -31,25 +34,7 @@
 }
 @keyframes rotate-conic { 100% { transform: translate(-50%, -50%) rotate(450deg); } }
 
-/* 3. Star Rotating Button */
-.button {
-  --stone-50: #fafaf9; --stone-800: #292524; --yellow-400: #facc15;
-  font-family: "Rubik", sans-serif; cursor: pointer; position: relative;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-weight: bold; font-size: 1.1rem; border-radius: 1rem; color: var(--stone-50);
-  background: none; border: none; width: 100%; max-width: 250px;
-}
-.button::before {
-  content: ""; position: absolute; z-index: 0; height: 180%; aspect-ratio: 1;
-  background: white; clip-path: polygon(100% 50%, 91.48% 56.57%, 97.55% 65.45%, 87.42% 69.07%, 90.45% 79.39%, 79.7% 79.7%, 79.39% 90.45%, 69.07% 87.42%, 65.45% 97.55%, 56.57% 91.48%, 50% 100%, 43.43% 91.48%, 34.55% 97.55%, 30.93% 87.42%, 20.61% 90.45%, 20.3% 79.7%, 9.55% 79.39%, 12.58% 69.07%, 2.45% 65.45%, 8.52% 56.57%, 0% 50%, 8.52% 43.43%, 2.45% 34.55%, 12.58% 30.93%, 9.55% 20.61%, 20.3% 20.3%, 20.61% 9.55%, 30.93% 12.58%, 34.55% 2.45%, 43.43% 8.52%, 50% 0%, 56.57% 8.52%, 65.45% 2.45%, 69.07% 12.58%, 79.39% 9.55%, 79.7% 20.3%, 90.45% 20.61%, 87.42% 30.93%, 97.55% 34.55%, 91.48% 43.43%);
-  animation: star-rotate 4s linear infinite; opacity: 0.1;
-}
-.button > div {
-  padding: 2px; border-radius: 1rem; background-color: var(--yellow-400); width: 100%;
-  transform: translate(-4px, -4px); transition: all 150ms ease;
-  box-shadow: 0 0 0 2px var(--stone-800), 4px 4px 0 2px var(--stone-800), 0 0 0 4px var(--stone-50), 4px 4px 0 4px var(--stone-50);
-}
-.button:hover > div { transform: translate(0, 0); box-shadow: 0 0 0 2px var(--stone-800), 0 0 0 4px var(--stone-50); }
-.button > div > div { position: relative; border-radius: calc(1rem - 2px); background-color: var(--stone-800); }
-.button > div > div > div { padding: 0.9rem 1.5rem; text-align: center; }
-@keyframes star-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+/* তোর বাকি সব CSS (Page, Button, Card) এখানে আগের মতোই থাকবে... */
+.page { position: absolute; inset: 0; padding: 10px; opacity: 0; visibility: hidden; transform: translateX(100%); transition: 0.8s ease; }
+.page.active { opacity: 1; visibility: visible; transform: translateX(0); }
+.btn-gold { background: linear-gradient(90deg, #ffe082, #ffb300, #ffd54f); color: #111827; border: none; border-radius: 18px; font-weight: 700; cursor: pointer; }
