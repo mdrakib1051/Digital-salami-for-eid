@@ -1,83 +1,55 @@
-:root {
-  --bg: #05070d;
-  --gold: #ffb300;
-  --panel-bg: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 215, 0, 0.2);
-}
-
+/* --- Base --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { 
-  background: var(--bg); 
-  color: white; 
-  font-family: 'Hind Siliguri', sans-serif; 
-  overflow: hidden; 
-}
-
-.bg-glow {
-  position: fixed; inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255,179,0,0.15), transparent 50%);
-  z-index: -1;
-}
-
-.page {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; visibility: hidden; transition: 0.5s;
-}
-.page.active { opacity: 1; visibility: visible; }
-
-.panel {
-  background: var(--panel-bg);
-  padding: 30px; border-radius: 25px;
-  border: 1px solid var(--border);
-  backdrop-filter: blur(15px);
-  text-align: center; width: 90%; max-width: 400px;
-}
-
-.main-title { font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 20px; }
-.main-title span { color: var(--gold); }
-
-/* বাটন স্টাইল */
-.premium-btn {
-  background: linear-gradient(90deg, #ffb300, #ffcc33);
-  border: none; padding: 15px 30px; border-radius: 12px;
-  font-weight: bold; cursor: pointer; width: 100%; margin-top: 20px;
-}
-
-/* স্লট মেশিন */
-.slot-machine { display: flex; gap: 10px; justify-content: center; margin: 20px 0; }
-.slot {
-  background: #1a1a1a; width: 70px; height: 90px;
-  font-size: 40px; display: flex; align-items: center;
-  justify-content: center; border-radius: 10px; border: 1px solid var(--gold);
-}
-
-/* ৩ডি কার্ড */
-.card-3d { width: 280px; height: 380px; perspective: 1000px; margin: 20px auto; }
-.card-content {
-  width: 100%; height: 100%; position: relative;
-  transition: transform 0.8s; transform-style: preserve-3d;
-}
-.card-3d:hover .card-content { transform: rotateY(180deg); }
-.card-front, .card-back {
-  position: absolute; inset: 0; backface-visibility: hidden;
-  border-radius: 20px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; padding: 20px;
-}
-.card-front { background: #111; border: 2px solid var(--gold); }
-.card-back { background: #1a1a1a; transform: rotateY(180deg); border: 2px solid white; }
-
-/* লোডার */
-.loader-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-  z-index: 999; display: flex; align-items: center; justify-content: center;
-}
+body { background: #05070d; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+.page { display: none; width: 100%; text-align: center; }
+.page.active { display: block; }
 .hidden { display: none !important; }
 
-/* ডমিনো স্পিনার */
-.spinner { display: flex; gap: 5px; }
-.spinner span { 
-  width: 8px; height: 30px; background: var(--gold); 
-  animation: domino 1s infinite ease-in-out;
+/* --- তোর দেওয়া Premium Button CSS --- */
+.button {
+  --stone-50: #fafaf9; --stone-800: #292524; --yellow-400: #facc15;
+  font-family: "Rubik", sans-serif; cursor: pointer; position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 1rem; border-radius: 1rem; color: var(--stone-50);
+  border: none; background: none;
 }
-@keyframes domino { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(2); } }
+.button::before {
+  content: ""; position: absolute; z-index: 0; height: 200%; max-height: 100px;
+  aspect-ratio: 1; background: white; clip-path: polygon(100% 50%, 91.48% 56.57%, 97.55% 65.45%, 87.42% 69.07%, 90.45% 79.39%, 79.7% 79.7%, 79.39% 90.45%, 69.07% 87.42%, 65.45% 97.55%, 56.57% 91.48%, 50% 100%, 43.43% 91.48%, 34.55% 97.55%, 30.93% 87.42%, 20.61% 90.45%, 20.3% 79.7%, 9.55% 79.39%, 12.58% 69.07%, 2.45% 65.45%, 8.52% 56.57%, 0% 50%, 8.52% 43.43%, 2.45% 34.55%, 12.58% 30.93%, 9.55% 20.61%, 20.3% 20.3%, 20.61% 9.55%, 30.93% 12.58%, 34.55% 2.45%, 43.43% 8.52%, 50% 0%, 56.57% 8.52%, 65.45% 2.45%, 69.07% 12.58%, 79.39% 9.55%, 79.7% 20.3%, 90.45% 20.61%, 87.42% 30.93%, 97.55% 34.55%, 91.48% 43.43%);
+  animation: star-rotate 4s linear infinite; opacity: 0.1;
+}
+.button:hover::before { opacity: 1; }
+.button > div {
+  padding: 2px; border-radius: 1rem; background-color: var(--yellow-400);
+  transform: translate(-4px, -4px); transition: all 150ms ease;
+  box-shadow: 0.5px 0.5px 0 0 var(--yellow-400), 1px 1px 0 0 var(--yellow-400), 2px 2px 0 0 var(--yellow-400), 0 0 0 2px var(--stone-800), 0.5px 0.5px 0 2px var(--stone-800), 4px 4px 0 2px var(--stone-800), 0 0 0 4px var(--stone-50), 4px 4px 0 4px var(--stone-50);
+}
+.button:hover > div { transform: translate(0, 0); box-shadow: 0 0 0 2px var(--stone-800), 0 0 0 4px var(--stone-50); }
+.button > div > div { position: relative; border-radius: calc(1rem - 2px); background-color: var(--stone-800); }
+.button > div > div > div { padding: 0.75rem 1.25rem; display: flex; align-items: center; }
+
+@keyframes star-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* --- তোর দেওয়া 3D Card CSS --- */
+.card { overflow: visible; width: 190px; height: 254px; margin: 0 auto; }
+.content { width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 300ms; box-shadow: 0px 0px 10px 1px #000000ee; border-radius: 5px; }
+.card:hover .content { transform: rotateY(180deg); }
+.front, .back { background-color: #151515; position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 5px; overflow: hidden; }
+.back { justify-content: center; display: flex; align-items: center; }
+.back::before { position: absolute; content: ' '; display: block; width: 160px; height: 160%; background: linear-gradient(90deg, transparent, #ff9966, #ff9966, transparent); animation: rotation_481 5000ms infinite linear; }
+.front { transform: rotateY(180deg); color: white; padding: 10px; }
+@keyframes rotation_481 { from { transform: rotateZ(0deg); } to { transform: rotateZ(360deg); } }
+
+/* --- তোর দেওয়া Conic Input CSS --- */
+.input { background-color: #010201; border: none; width: 301px; height: 56px; border-radius: 10px; color: white; padding-inline: 20px; font-size: 18px; }
+#poda { display: flex; align-items: center; justify-content: center; position: relative; }
+.glow, .darkBorderBg, .white, .border { position: absolute; width: 314px; height: 70px; z-index: -1; border-radius: 12px; filter: blur(3px); }
+.white::before { content: ""; position: absolute; width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-image: conic-gradient(transparent 0%, #a099d8, transparent 8%, transparent 50%, #dfa2da, transparent 58%); animation: rotate 4s linear infinite; }
+@keyframes rotate { 100% { transform: translate(-50%, -50%) rotate(450deg); } }
+
+/* --- তোর দেওয়া Domino Spinner --- */
+.loader-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; display: flex; align-items: center; justify-content: center; }
+.spinner { position: relative; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; }
+.spinner span { position: absolute; width: 35px; height: 7px; background: #fff; animation: dominos 1s ease infinite; }
+/* ... (বাকি স্পিনার অ্যানিমেশন) ... */
+@keyframes dominos { 50% { opacity: 0.7; } 75% { transform: rotate(90deg); } 80% { opacity: 1; } }
