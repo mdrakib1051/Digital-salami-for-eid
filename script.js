@@ -1,23 +1,21 @@
-// ... (তোর সব ভ্যারিয়েবল আগের মতোই থাকবে) ...
-
+// রাকিবের অরিজিনাল লজিক + লোডার ট্রিগার
 const loaderOverlay = document.getElementById('loaderOverlay');
+// ... (বাকি সব const আগের মতোই থাকবে) ...
 
-// স্লাইড চেঞ্জ ফাংশন (তোর অরিজিনালটা)
 function changePage(currentPage, nextPage) {
   currentPage.classList.remove('active');
   currentPage.classList.add('exit-left');
   setTimeout(() => { nextPage.classList.add('active'); }, 220);
 }
 
-// সেভ ইনফো বাটন
 saveInfoBtn.addEventListener('click', () => {
-  if (!nameInput.value.trim() || !districtInput.value) {
-    alert('সব তথ্য দিন!'); return;
-  }
-  savedName = nameInput.value.trim();
-  savedDistrict = districtInput.value;
-  
-  // লোডার দেখানো
+  const name = nameInput.value.trim();
+  const district = districtInput.value;
+  if (!name || !district) { alert('সব তথ্য দিন!'); return; }
+
+  savedName = name; savedDistrict = district;
+
+  // লোডার চালু
   loaderOverlay.classList.remove('hidden');
   setTimeout(() => {
     loaderOverlay.classList.add('hidden');
@@ -25,18 +23,17 @@ saveInfoBtn.addEventListener('click', () => {
   }, 1500);
 });
 
-// স্পিন বাটন লজিক
 spinBtn.addEventListener('click', () => {
   if (rolling) return;
   rolling = true;
+  statusText.textContent = 'আপনার সালামি তৈরি হচ্ছে...';
   startSlotAnimation();
-  
-  // ৩ সেকেন্ড পর রেজাল্ট
+
   setTimeout(() => {
     stopSlotAnimation();
-    // ... তোর সেই রেজাল্ট ক্যালকুলেশন কোড ...
+    currentAmount = Math.floor(Math.random() * 100) + 1;
+    // ... তোর বাকি রেজাল্ট লজিক ...
     
-    // পেজ ৪ এ যাওয়ার আগে লোডার
     loaderOverlay.classList.remove('hidden');
     setTimeout(() => {
       loaderOverlay.classList.add('hidden');
@@ -46,3 +43,4 @@ spinBtn.addEventListener('click', () => {
     }, 1200);
   }, 3000);
 });
+// ... বাকি সব ফাংশন আগের মতোই থাকবে ...
