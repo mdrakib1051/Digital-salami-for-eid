@@ -3,66 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Salami | Created by Md Rakib</title>
+  <title>Digital Salami</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Hind+Siliguri:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-glow glow-1"></div>
   <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
 
   <main class="app">
     <section id="page1" class="page active">
+      <div class="topbar"><div class="brand">Digital Salami</div></div>
       <div class="center-wrap">
         <div class="intro-panel enter-up">
-          <p class="mini-badge">EID SPECIAL 🌙</p>
+          <p class="mini-badge">EID SPECIAL</p>
           <h1 class="main-title">Digital <span>Salami</span></h1>
-          <p class="small-instruction">নাম ও জেলা দিয়ে স্পিন করুন আর আপনার ডিজিটাল সালামি কার্ডটি বুঝে নিন!</p>
-          <button id="goInfoBtn" class="btn btn-gold">শুরু করুন</button>
+          <p class="small-instruction">নাম দিন, জেলা নির্বাচন করুন, স্পিন করুন এবং আপনার personal Eid wish card নিন।</p>
+          <button id="goInfoBtn" class="btn btn-gold">Start</button>
         </div>
       </div>
     </section>
 
     <section id="page2" class="page">
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-pill">Step 01</div>
+      </div>
       <div class="center-wrap">
         <div class="info-panel enter-up">
-          <h2 class="section-title">আপনার তথ্য</h2>
+          <h2 class="section-title">Your Info</h2>
           <label class="input-label">আপনার নাম</label>
           <input id="nameInput" type="text" placeholder="যেমন: Rakib">
           <label class="input-label">আপনার জেলা</label>
           <select id="districtInput">
             <option value="">জেলা নির্বাচন করুন</option>
-            <option value="Dhaka">ঢাকা</option>
-            <option value="Chattogram">চট্টগ্রাম</option>
-            <option value="Sylhet">সিলেট</option>
-            <option value="Barishal">বরিশাল</option>
-            <option value="Noakhali">নোয়াখালী</option>
-            <option value="Cumilla">কুমিল্লা</option>
-            <option value="Rajshahi">রাজশাহী</option>
-            <option value="Khulna">খুলনা</option>
+            <option>Dhaka</option><option>Chattogram</option><option>Sylhet</option>
+            <option>Barishal</option><option>Noakhali</option><option>Cumilla</option>
+            <option>Rajshahi</option><option>Khulna</option>
           </select>
-          <button id="saveInfoBtn" class="btn btn-gold" style="margin-top:20px;">চালিয়ে যান</button>
+          <button id="saveInfoBtn" class="btn btn-gold">Continue</button>
           <div id="welcomeBox" class="welcome-box hidden"></div>
         </div>
       </div>
     </section>
 
     <section id="page3" class="page">
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-pill">Step 02</div>
+      </div>
       <div class="center-wrap">
         <div class="slot-panel enter-up">
           <h2 class="section-title center">Magic Slot</h2>
+          <p class="small-instruction center">আপনার ডিজিটাল সালামি জানার জন্য একবার spin করুন</p>
           <div class="slot-machine">
             <div class="slot-frame">
               <div class="slot" id="slot1">0</div>
               <div class="slot" id="slot2">0</div>
-              <div class="slot" id="slot3">0</div>
+              <div class="slot" id="slot3">1</div>
             </div>
             <div class="slot-shine"></div>
           </div>
-          <button id="spinBtn" class="btn btn-gold big-btn">Spin Now 🎰</button>
-          <p id="statusText" class="status-text" style="margin-top:10px;">সালামি জিততে স্পিন করুন!</p>
+          <button id="spinBtn" class="btn btn-gold big-btn">Spin Now</button>
+          <div id="statusText" class="status-text">সালামি পেতে স্পিন দিন ✨</div>
         </div>
       </div>
     </section>
@@ -75,12 +81,14 @@
               <div>
                 <p class="mini-badge">DIGITAL SALAMI CARD</p>
                 <h2 id="cardGreeting" class="card-title">ঈদ মোবারক</h2>
+                <p id="resultText" class="card-subtitle">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
               </div>
               <div class="moon-box">🌙</div>
             </div>
             <div class="banner staged stage-2">
+              <div class="banner-overlay"></div>
               <div class="banner-content">
-                <p class="banner-script">Blessings & Smiles</p>
+                <p class="banner-script">Blessings, Joy & Smiles</p>
                 <div id="amountText" class="amount-chip">৳ 0</div>
               </div>
             </div>
@@ -95,16 +103,15 @@
           </div>
 
           <div id="leaderboardBox" class="side-box hidden staged stage-6">
-            <h3>Latest 7 Lucky Winners 🏆</h3>
-            <div id="leaderboardList" class="leaderboard-list">লোড হচ্ছে...</div>
+            <h3>Latest 7 Leaderboard</h3>
+            <div id="leaderboardList" class="leaderboard-list"></div>
           </div>
 
           <div id="shareBox" class="side-box hidden staged stage-7">
-            <h3>Share Your Joy 🚀</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:10px;">
-              <button onclick="shareSocial('fb')" class="btn" style="background:#1877F2; color:white;">Facebook</button>
-              <button onclick="shareSocial('wa')" class="btn" style="background:#25D366; color:white;">WhatsApp</button>
-              <button onclick="shareSocial('copy')" class="btn" style="background:#444; color:white; grid-column: span 2;">Copy Link</button>
+            <h3>Share Salami Card</h3>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+              <button onclick="shareSocial('fb')" class="btn btn-gold" style="font-size: 14px;">Facebook</button>
+              <button onclick="shareSocial('wa')" class="btn btn-gold" style="font-size: 14px;">WhatsApp</button>
             </div>
           </div>
 
@@ -115,7 +122,6 @@
       </div>
     </section>
   </main>
-
   <script type="module" src="script.js"></script>
 </body>
 </html>
