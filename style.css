@@ -19,7 +19,7 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow: hidden;
 }
 
@@ -40,6 +40,7 @@ body {
   opacity: 0.42;
   z-index: 0;
   animation: floatGlow 9s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .glow-1 {
@@ -84,6 +85,8 @@ body {
   visibility: hidden;
   transform: translateX(100%);
   transition: transform 0.85s cubic-bezier(.22,.8,.2,1), opacity 0.85s ease, visibility 0.85s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .page.active {
@@ -103,6 +106,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 4px 4px 12px;
+  gap: 10px;
 }
 
 .brand {
@@ -124,10 +128,11 @@ body {
 }
 
 .center-wrap {
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 20px;
 }
 
 .intro-panel,
@@ -338,8 +343,9 @@ select option {
 .final-layout {
   min-height: calc(100vh - 50px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding-bottom: 32px;
 }
 
 .main-column {
@@ -368,6 +374,7 @@ select option {
   align-items: center;
   justify-content: center;
   font-size: 30px;
+  flex-shrink: 0;
 }
 
 .banner {
@@ -503,6 +510,7 @@ select option {
   font-size: 22px;
   color: #e5e7eb;
   letter-spacing: 0.6px;
+  padding-bottom: 30px;
 }
 
 .created-by span {
@@ -564,18 +572,62 @@ select option {
 }
 
 @media (max-width: 700px) {
+  .page {
+    padding: 8px;
+  }
+
+  .topbar {
+    padding-bottom: 10px;
+  }
+
+  .brand {
+    font-size: 17px;
+  }
+
+  .step-pill,
+  .mini-badge {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+
+  .center-wrap {
+    min-height: calc(100vh - 56px);
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 24px;
+  }
+
+  .intro-panel,
+  .info-panel,
+  .slot-panel,
+  .premium-card,
+  .side-box {
+    border-radius: 22px;
+    padding: 16px;
+  }
+
   .slot {
     width: 74px;
     height: 92px;
     font-size: 40px;
   }
 
+  .banner {
+    min-height: 190px;
+  }
+
+  .banner-content {
+    min-height: 190px;
+    padding: 16px;
+  }
+
   .banner-script {
-    font-size: 34px;
+    font-size: 30px;
   }
 
   .amount-chip {
     font-size: 24px;
+    padding: 10px 16px;
   }
 
   .meta-grid {
@@ -583,20 +635,32 @@ select option {
   }
 
   .card-header {
+    flex-direction: row;
     align-items: center;
   }
 
   .moon-box {
-    width: 60px;
-    height: 60px;
-    font-size: 26px;
+    width: 58px;
+    height: 58px;
+    font-size: 24px;
+  }
+
+  .typed-wish {
+    min-height: 76px;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  .side-box h3 {
+    font-size: 18px;
   }
 
   .created-by {
     font-size: 18px;
+    padding-bottom: 38px;
   }
 
   .created-by span {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
