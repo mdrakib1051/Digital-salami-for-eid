@@ -6,7 +6,59 @@
 
 :root {
   --bg1: #05070d;
-  --bg2: #0d1220;
+  --bg2: #0d1220;/* All Premium CSS Combined */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: #05070d; color: white; overflow: hidden;
+}
+
+/* Loader Styling */
+.loader-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+  z-index: 10000; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; backdrop-filter: blur(10px);
+}
+.spinner { position: relative; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; }
+.spinner span { position: absolute; width: 35px; height: 7px; background: #fff; animation: dominos 1s ease infinite; }
+/* ... (Add other nth-child delays from your domino code here) */
+
+/* Button Styling (Star Rotate) */
+.button {
+  cursor: pointer; position: relative; display: inline-flex; align-items: center;
+  justify-content: center; font-weight: bold; border-radius: 1rem; color: #fafaf9;
+  background: transparent; border: none;
+}
+.button::before {
+  content: ""; position: absolute; z-index: 0; height: 200%; aspect-ratio: 1;
+  background: white; clip-path: polygon(100% 50%, 91.48% 56.57%, ...); /* Add full polygon here */
+  animation: star-rotate 4s linear infinite; opacity: 0.1;
+}
+/* ... (Add rest of your button CSS here) */
+
+/* 3D Card Styling */
+.card { overflow: visible; width: 260px; height: 350px; margin: 0 auto; perspective: 1000px; }
+.content { width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 600ms; }
+.card:hover .content { transform: rotateY(180deg); }
+.front, .back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; }
+.back { background: #151515; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.back::before { position: absolute; content: ''; width: 160px; height: 160%; background: linear-gradient(90deg, transparent, #ff9966, transparent); animation: rotation_481 5s infinite linear; }
+.front { transform: rotateY(180deg); background: #1a1a1a; }
+
+/* Conic Search Bar Styling */
+#poda { display: flex; align-items: center; justify-content: center; margin: 20px 0; }
+.input { background-color: #010201; border: none; width: 300px; height: 56px; border-radius: 10px; color: white; padding-inline: 50px; font-size: 16px; }
+/* ... (Add rest of your conic search bar CSS here) */
+
+/* Animations */
+@keyframes star-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rotation_481 { from { transform: rotateZ(0deg); } to { transform: rotateZ(360deg); } }
+@keyframes dominos { 50% { opacity: 0.7; } 75% { transform: rotate(90deg); } 80% { opacity: 1; } }
+
+/* Shared Styles */
+.hidden { display: none !important; }
+.page { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: 0.5s; }
+.page.active { opacity: 1; visibility: visible; }
   --glass: rgba(255, 255, 255, 0.06);
   --line: rgba(255, 255, 255, 0.1);
   --gold: #ffd56a;
