@@ -1,73 +1,184 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Salami | Md Rakib</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Rubik:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Salami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
 
-    <div id="loaderOverlay" class="loader-overlay hidden">
-        <div class="spinner">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-        </div>
-    </div>
+  <main class="app">
 
+    <!-- PAGE 1 -->
     <section id="page1" class="page active">
-        <div class="container">
-            <h1 style="color:white; margin-bottom:20px; font-family:'Hind Siliguri'">ডিজিটাল সালামি ২০২৬</h1>
-            <button id="startBtn" class="button">
-                <div><div><div><div>শুরু করুন</div></div></div></div>
-            </button>
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+      </div>
+
+      <div class="center-wrap">
+        <div class="intro-panel enter-up">
+          <p class="mini-badge">EID SPECIAL</p>
+          <h1 class="main-title">Digital <span>Salami</span></h1>
+          <p class="small-instruction">
+            নাম দিন, জেলা নির্বাচন করুন, স্পিন করুন, আর আপনার personal Eid wish card নিন।
+          </p>
+          <button id="goInfoBtn" class="btn btn-gold">Start</button>
         </div>
+      </div>
     </section>
 
+    <!-- PAGE 2 -->
     <section id="page2" class="page">
-        <div class="container">
-            <div id="poda">
-                <div id="main">
-                    <div class="glow"></div><div class="darkBorderBg"></div><div class="white"></div><div class="border"></div>
-                    <input id="nameInput" class="input" type="text" placeholder="আপনার নাম লিখুন...">
-                    <div id="input-mask"></div><div id="pink-mask"></div>
-                </div>
-            </div>
-            <button id="infoNextBtn" class="button" style="margin-top: 30px;">
-                <div><div><div><div>চালিয়ে যান</div></div></div></div>
-            </button>
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-pill">Step 01</div>
+      </div>
+
+      <div class="center-wrap">
+        <div class="info-panel enter-up">
+          <h2 class="section-title">Your Info</h2>
+
+          <label class="input-label">আপনার নাম</label>
+          <input id="nameInput" type="text" placeholder="যেমন: Rakib">
+
+          <label class="input-label">আপনার জেলা</label>
+          <select id="districtInput">
+            <option value="">জেলা নির্বাচন করুন</option>
+            <option>Dhaka</option>
+            <option>Chattogram</option>
+            <option>Sylhet</option>
+            <option>Rajshahi</option>
+            <option>Khulna</option>
+            <option>Barishal</option>
+            <option>Rangpur</option>
+            <option>Mymensingh</option>
+            <option>Cumilla</option>
+            <option>Noakhali</option>
+            <option>Jessore</option>
+            <option>Bogra</option>
+            <option>Dinajpur</option>
+            <option>Pabna</option>
+            <option>Faridpur</option>
+            <option>Kushtia</option>
+          </select>
+
+          <button id="saveInfoBtn" class="btn btn-gold">Continue</button>
+          <div id="welcomeBox" class="welcome-box hidden"></div>
         </div>
+      </div>
     </section>
 
+    <!-- PAGE 3 -->
     <section id="page3" class="page">
-        <div class="container">
-            <div class="card" id="cardBox">
-                <div class="content">
-                    <div class="back">
-                        <div class="back-content">
-                            <div class="circle"></div><div class="circle" id="bottom"></div><div class="circle" id="right"></div>
-                            <strong style="font-family: 'Hind Siliguri'">সালামি কার্ড</strong>
-                            <small>ফ্লিপ করতে টাচ করুন</small>
-                        </div>
-                    </div>
-                    <div class="front">
-                        <div class="front-content">
-                            <div class="badge">EID SPECIAL</div>
-                            <div class="description">
-                                <div class="title">
-                                    <p id="resName" style="font-weight: bold;"></p>
-                                </div>
-                                <div style="font-size: 24px; color: #ffbb66; margin: 10px 0;">৳ <span id="resAmt"></span></div>
-                                <p class="card-footer">Digital Salami • Md Rakib</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-pill">Step 02</div>
+      </div>
+
+      <div class="center-wrap">
+        <div class="slot-panel enter-up">
+          <h2 class="section-title center">Magic Slot</h2>
+          <p class="small-instruction center">আপনার ডিজিটাল সালামি জানার জন্য spin করুন</p>
+
+          <div class="slot-machine">
+            <div class="slot-frame">
+              <div class="slot" id="slot1">0</div>
+              <div class="slot" id="slot2">0</div>
+              <div class="slot" id="slot3">1</div>
             </div>
+            <div class="slot-shine"></div>
+          </div>
+
+          <button id="spinBtn" class="btn btn-gold big-btn">Spin Now</button>
+          <div id="statusText" class="status-text">Ready for your Digital Salami ✨</div>
         </div>
+      </div>
     </section>
 
-    <script src="script.js"></script>
+    <!-- PAGE 4 -->
+    <section id="page4" class="page">
+      <div class="topbar">
+        <div class="brand">Digital Salami</div>
+        <div class="step-pill">Final</div>
+      </div>
+
+      <div class="final-layout">
+        <div class="main-column">
+
+          <div id="cardBox" class="premium-card hidden">
+            <div class="card-header staged stage-1">
+              <div>
+                <p class="mini-badge">DIGITAL SALAMI CARD</p>
+                <h2 id="cardGreeting" class="card-title">ঈদ মোবারক</h2>
+                <p id="resultText" class="card-subtitle">আপনার জন্য ডিজিটাল সালামি প্রস্তুত।</p>
+              </div>
+              <div class="moon-box">🌙</div>
+            </div>
+
+            <div class="banner staged stage-2">
+              <div class="banner-overlay"></div>
+              <div class="banner-content">
+                <p class="banner-script">Blessings, Joy & Smiles</p>
+                <div id="amountText" class="amount-chip">৳ 0</div>
+              </div>
+            </div>
+
+            <div class="meta-grid">
+              <div class="meta-item staged stage-3">
+                <span>নাম</span>
+                <strong id="cardName">—</strong>
+              </div>
+              <div class="meta-item staged stage-4">
+                <span>জেলা</span>
+                <strong id="cardDistrict">—</strong>
+              </div>
+            </div>
+
+            <div class="wish-box staged stage-5">
+              <span class="wish-label">Regional Special Wish</span>
+              <p id="typedWish" class="typed-wish"></p>
+            </div>
+          </div>
+
+          <div id="leaderboardBox" class="side-box hidden staged stage-6">
+            <h3>Latest 7 Leaderboard</h3>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+          </div>
+
+          <div id="contactBox" class="side-box hidden staged stage-7">
+            <h3>WhatsApp Message</h3>
+            <input id="phoneInput" type="text" placeholder="আপনার ফোন নাম্বার">
+            <textarea id="messageInput" placeholder="আপনার message লিখুন..."></textarea>
+            <button id="whatsappBtn" class="btn btn-gold">Send via WhatsApp</button>
+          </div>
+
+          <div id="shareBox" class="side-box hidden staged stage-8">
+            <h3>Share Publicly</h3>
+            <div class="share-grid">
+              <button id="shareNativeBtn" class="btn btn-soft">Share</button>
+              <button id="copyBtn" class="btn btn-outline">Copy Text</button>
+              <button id="facebookBtn" class="btn btn-soft">Facebook</button>
+              <button id="twitterBtn" class="btn btn-outline">X / Twitter</button>
+              <button id="whatsappShareBtn" class="btn btn-soft">WhatsApp</button>
+            </div>
+          </div>
+
+          <div id="createdBy" class="created-by hidden staged stage-9">
+            Created by <span>Md Rakib</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
